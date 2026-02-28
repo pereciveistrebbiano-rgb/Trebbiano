@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Trebbiano">
+<meta name="application-name" content="Trebbiano">
+<meta name="theme-color" content="#3D0E1A">
+<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KICA8ZGVmcz4KICAgIDxyYWRpYWxHcmFkaWVudCBpZD0iYmdyIiBjeD0iNDAlIiBjeT0iMzUlIiByPSI3NSUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjNkIxQTJBIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzI1MEExMiIvPgogICAgPC9yYWRpYWxHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZ2xkIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI0YwRDg4MiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI0M4QTg0QiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM5QTc4MjgiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdsYXNzR3JhZCIgeDE9IjEwJSIgeTE9IjAlIiB4Mj0iOTAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9InJnYmEoMjQwLDIxNiwxMzAsMC45NSkiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSJyZ2JhKDIwMCwxNjgsNzUsMC43KSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxmaWx0ZXIgaWQ9Imdsb3ciPgogICAgICA8ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIzIiByZXN1bHQ9ImJsdXIiLz4KICAgICAgPGZlTWVyZ2U+PGZlTWVyZ2VOb2RlIGluPSJibHVyIi8+PGZlTWVyZ2VOb2RlIGluPSJTb3VyY2VHcmFwaGljIi8+PC9mZU1lcmdlPgogICAgPC9maWx0ZXI+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiByeD0iMTE1IiBmaWxsPSJ1cmwoI2JncikiLz4KICA8cmVjdCB4PSIxNCIgeT0iMTQiIHdpZHRoPSI0ODQiIGhlaWdodD0iNDg0IiByeD0iMTA0IiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMjAwLDE2OCw3NSwwLjIpIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8cGF0aCBkPSJNIDE2OCA3MiBMIDM0NCA3MiBRIDM1NiA3MiAzNjAgODYgQyAzNjggMTE4IDM3MiAxNTUgMzYwIDE5MiBDIDM0NSAyMzggMzA4IDI2OCAyNTYgMjcyIEMgMjA0IDI2OCAxNjcgMjM4IDE1MiAxOTIgQyAxNDAgMTU1IDE0NCAxMTggMTUyIDg2IFEgMTU2IDcyIDE2OCA3MiBaIiBmaWxsPSJ1cmwoI2dsYXNzR3JhZCkiLz4KICA8cGF0aCBkPSJNIDE2NSAxNzUgQyAxNjIgMTU1IDE1OCAxMjggMTYwIDEwOCBMIDM1MiAxMDggQyAzNTQgMTI4IDM1MCAxNTUgMzQ3IDE3NSBDIDM0MCAyMjIgMzA1IDI2MCAyNTYgMjY0IEMgMjA3IDI2MCAxNzIgMjIyIDE2NSAxNzUgWiIgZmlsbD0iIzdBMTQyMiIgb3BhY2l0eT0iMC45MiIvPgogIDxlbGxpcHNlIGN4PSIyMTgiIGN5PSIxMTIiIHJ4PSIzMCIgcnk9IjgiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xMikiIHRyYW5zZm9ybT0icm90YXRlKC0xMCwyMTgsMTEyKSIvPgogIDxwYXRoIGQ9Ik0gMTcyIDkwIFEgMTY1IDEzMCAxNjMgMTc1IiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC4yNSkiIHN0cm9rZS13aWR0aD0iNiIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHJlY3QgeD0iMjQxIiB5PSIyNzIiIHdpZHRoPSIzMCIgaGVpZ2h0PSIxMDAiIHJ4PSIxMCIgZmlsbD0idXJsKCNnbGFzc0dyYWQpIiBvcGFjaXR5PSIwLjg1Ii8+CiAgPGVsbGlwc2UgY3g9IjI1NiIgY3k9IjM3OCIgcng9IjY4IiByeT0iMTYiIGZpbGw9InVybCgjZ2xhc3NHcmFkKSIgb3BhY2l0eT0iMC44NSIvPgogIDxlbGxpcHNlIGN4PSIyNDAiIGN5PSIzNzQiIHJ4PSIyOCIgcnk9IjYiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xNSkiLz4KICA8dGV4dCB4PSIyNTYiIHk9IjQ1NSIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsIFRpbWVzIE5ldyBSb21hbiwgc2VyaWYiIGZvbnQtc2l6ZT0iODgiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSJ1cmwoI2dsZCkiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbHRlcj0idXJsKCNnbG93KSI+VDwvdGV4dD4KICA8Y2lyY2xlIGN4PSIxMjAiIGN5PSI0NTMiIHI9IjQiIGZpbGw9InJnYmEoMjAwLDE2OCw3NSwwLjUpIi8+CiAgPGNpcmNsZSBjeD0iMzkyIiBjeT0iNDUzIiByPSI0IiBmaWxsPSJyZ2JhKDIwMCwxNjgsNzUsMC41KSIvPgogIDxsaW5lIHgxPSIxMzIiIHkxPSI0NTMiIHgyPSIyMjAiIHkyPSI0NTMiIHN0cm9rZT0icmdiYSgyMDAsMTY4LDc1LDAuMzUpIiBzdHJva2Utd2lkdGg9IjEuNSIvPgogIDxsaW5lIHgxPSIyOTIiIHkxPSI0NTMiIHgyPSIzODAiIHkyPSI0NTMiIHN0cm9rZT0icmdiYSgyMDAsMTY4LDc1LDAuMzUpIiBzdHJva2Utd2lkdGg9IjEuNSIvPgo8L3N2Zz4=">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KICA8ZGVmcz4KICAgIDxyYWRpYWxHcmFkaWVudCBpZD0iYmdyIiBjeD0iNDAlIiBjeT0iMzUlIiByPSI3NSUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjNkIxQTJBIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzI1MEExMiIvPgogICAgPC9yYWRpYWxHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZ2xkIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI0YwRDg4MiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI0M4QTg0QiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM5QTc4MjgiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdsYXNzR3JhZCIgeDE9IjEwJSIgeTE9IjAlIiB4Mj0iOTAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9InJnYmEoMjQwLDIxNiwxMzAsMC45NSkiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSJyZ2JhKDIwMCwxNjgsNzUsMC43KSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxmaWx0ZXIgaWQ9Imdsb3ciPgogICAgICA8ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIzIiByZXN1bHQ9ImJsdXIiLz4KICAgICAgPGZlTWVyZ2U+PGZlTWVyZ2VOb2RlIGluPSJibHVyIi8+PGZlTWVyZ2VOb2RlIGluPSJTb3VyY2VHcmFwaGljIi8+PC9mZU1lcmdlPgogICAgPC9maWx0ZXI+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiByeD0iMTE1IiBmaWxsPSJ1cmwoI2JncikiLz4KICA8cmVjdCB4PSIxNCIgeT0iMTQiIHdpZHRoPSI0ODQiIGhlaWdodD0iNDg0IiByeD0iMTA0IiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMjAwLDE2OCw3NSwwLjIpIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8cGF0aCBkPSJNIDE2OCA3MiBMIDM0NCA3MiBRIDM1NiA3MiAzNjAgODYgQyAzNjggMTE4IDM3MiAxNTUgMzYwIDE5MiBDIDM0NSAyMzggMzA4IDI2OCAyNTYgMjcyIEMgMjA0IDI2OCAxNjcgMjM4IDE1MiAxOTIgQyAxNDAgMTU1IDE0NCAxMTggMTUyIDg2IFEgMTU2IDcyIDE2OCA3MiBaIiBmaWxsPSJ1cmwoI2dsYXNzR3JhZCkiLz4KICA8cGF0aCBkPSJNIDE2NSAxNzUgQyAxNjIgMTU1IDE1OCAxMjggMTYwIDEwOCBMIDM1MiAxMDggQyAzNTQgMTI4IDM1MCAxNTUgMzQ3IDE3NSBDIDM0MCAyMjIgMzA1IDI2MCAyNTYgMjY0IEMgMjA3IDI2MCAxNzIgMjIyIDE2NSAxNzUgWiIgZmlsbD0iIzdBMTQyMiIgb3BhY2l0eT0iMC45MiIvPgogIDxlbGxpcHNlIGN4PSIyMTgiIGN5PSIxMTIiIHJ4PSIzMCIgcnk9IjgiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xMikiIHRyYW5zZm9ybT0icm90YXRlKC0xMCwyMTgsMTEyKSIvPgogIDxwYXRoIGQ9Ik0gMTcyIDkwIFEgMTY1IDEzMCAxNjMgMTc1IiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC4yNSkiIHN0cm9rZS13aWR0aD0iNiIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHJlY3QgeD0iMjQxIiB5PSIyNzIiIHdpZHRoPSIzMCIgaGVpZ2h0PSIxMDAiIHJ4PSIxMCIgZmlsbD0idXJsKCNnbGFzc0dyYWQpIiBvcGFjaXR5PSIwLjg1Ii8+CiAgPGVsbGlwc2UgY3g9IjI1NiIgY3k9IjM3OCIgcng9IjY4IiByeT0iMTYiIGZpbGw9InVybCgjZ2xhc3NHcmFkKSIgb3BhY2l0eT0iMC44NSIvPgogIDxlbGxpcHNlIGN4PSIyNDAiIGN5PSIzNzQiIHJ4PSIyOCIgcnk9IjYiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xNSkiLz4KICA8dGV4dCB4PSIyNTYiIHk9IjQ1NSIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsIFRpbWVzIE5ldyBSb21hbiwgc2VyaWYiIGZvbnQtc2l6ZT0iODgiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSJ1cmwoI2dsZCkiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbHRlcj0idXJsKCNnbG93KSI+VDwvdGV4dD4KICA8Y2lyY2xlIGN4PSIxMjAiIGN5PSI0NTMiIHI9IjQiIGZpbGw9InJnYmEoMjAwLDE2OCw3NSwwLjUpIi8+CiAgPGNpcmNsZSBjeD0iMzkyIiBjeT0iNDUzIiByPSI0IiBmaWxsPSJyZ2JhKDIwMCwxNjgsNzUsMC41KSIvPgogIDxsaW5lIHgxPSIxMzIiIHkxPSI0NTMiIHgyPSIyMjAiIHkyPSI0NTMiIHN0cm9rZT0icmdiYSgyMDAsMTY4LDc1LDAuMzUpIiBzdHJva2Utd2lkdGg9IjEuNSIvPgogIDxsaW5lIHgxPSIyOTIiIHkxPSI0NTMiIHgyPSIzODAiIHkyPSI0NTMiIHN0cm9rZT0icmdiYSgyMDAsMTY4LDc1LDAuMzUpIiBzdHJva2Utd2lkdGg9IjEuNSIvPgo8L3N2Zz4=">
+<title>Trebbiano · Perecíveis</title>
+<link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlRyZWJiaWFubyBQZXJlY8OtdmVpcyIsCiAgInNob3J0X25hbWUiOiAiVHJlYmJpYW5vIiwKICAiZGVzY3JpcHRpb24iOiAiQ29udHJvbGUgZGUgcGVyZWPDrXZlaXMgZGEgbG9qYSBUcmViYmlhbm8iLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzNEMEUxQSIsCiAgInRoZW1lX2NvbG9yIjogIiMzRDBFMUEiLAogICJvcmllbnRhdGlvbiI6ICJwb3J0cmFpdCIKfQ==">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --burg: #5C1A2A;
+  --burg2: #3D0E1A;
+  --gold: #C8A84B;
+  --gold2: #E8CC7A;
+  --cream: #F7F0E3;
+  --cream2: #EDE2CC;
+  --text: #2A1A0E;
+  --muted: #8A7462;
+  --white: #FEFCF7;
+  --green: #1E6B47;
+  --green-bg: #E6F5EE;
+  --orange: #B84A00;
+  --orange-bg: #FFF0E6;
+  --red: #8B1A1A;
+  --red-bg: #FDEAEA;
+  --yellow: #8B6A00;
+  --yellow-bg: #FFF8E6;
+  --radius: 16px;
+  --shadow: 0 4px 24px rgba(42,26,14,0.10);
+}
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+body {
+  background: var(--cream);
+  font-family: 'Outfit', sans-serif;
+  color: var(--text);
+  min-height: 100vh;
+  max-width: 480px;
+  margin: 0 auto;
+  position: relative;
+  padding-bottom: 80px;
+}
+.header {
+  background: linear-gradient(135deg, var(--burg2) 0%, var(--burg) 100%);
+  padding: 20px 20px 22px;
+  position: sticky; top: 0; z-index: 50;
+  box-shadow: 0 4px 20px rgba(92,26,42,0.35);
+}
+.header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.logo h1 { font-family: 'Cormorant Garamond', serif; font-size: 26px; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; line-height: 1; }
+.logo span { font-size: 9px; color: rgba(200,168,75,0.55); letter-spacing: 4px; text-transform: uppercase; display: block; margin-top: 2px; }
+.header-date { text-align: right; font-size: 11px; color: rgba(200,168,75,0.6); line-height: 1.5; }
+.header-date strong { display: block; font-size: 13px; color: var(--gold2); font-weight: 500; }
+.summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.sum-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(200,168,75,0.2); border-radius: 12px; padding: 10px 8px; text-align: center; cursor: pointer; transition: all 0.2s; }
+.sum-card:active { transform: scale(0.97); }
+.sum-card .sum-num { font-size: 26px; font-weight: 700; line-height: 1; margin-bottom: 2px; }
+.sum-card .sum-label { font-size: 9px; letter-spacing: 0.5px; text-transform: uppercase; color: rgba(245,239,224,0.65); line-height: 1.2; }
+.sum-card.vencido .sum-num { color: #FF7070; }
+.sum-card.alerta .sum-num { color: #FFB347; }
+.sum-card.baixo .sum-num { color: #7EC8E3; }
+.content { padding: 16px; }
+.section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; margin-top: 4px; }
+.section-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; color: var(--burg); }
+.section-sub { font-size: 12px; color: var(--muted); margin-top: 1px; }
+.filter-bar { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; margin-bottom: 14px; padding-bottom: 2px; }
+.filter-bar::-webkit-scrollbar { display: none; }
+.filter-btn { flex-shrink: 0; padding: 6px 14px; border-radius: 20px; border: 1.5px solid var(--cream2); background: var(--white); font-size: 12px; font-family: 'Outfit', sans-serif; font-weight: 500; color: var(--muted); cursor: pointer; transition: all 0.2s; }
+.filter-btn.active { background: var(--burg); border-color: var(--burg); color: var(--gold2); }
+.product-card { background: var(--white); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 10px; box-shadow: var(--shadow); border-left: 4px solid transparent; animation: slideIn 0.3s ease both; }
+@keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.product-card.status-vencido { border-left-color: var(--red); animation: slideIn 0.3s ease both, pulseBorder 1.4s ease-in-out infinite; }
+.product-card.status-alerta { border-left-color: var(--orange); animation: slideIn 0.3s ease both, pulseOrange 2s ease-in-out infinite; }
+
+@keyframes pulseBorder {
+  0%,100% { border-left-width: 4px; box-shadow: var(--shadow); background: var(--white); }
+  50% { border-left-width: 7px; box-shadow: 0 0 0 3px rgba(139,26,26,0.12), var(--shadow); background: #fff8f8; }
+}
+@keyframes pulseOrange {
+  0%,100% { border-left-width: 4px; box-shadow: var(--shadow); }
+  50% { border-left-width: 6px; box-shadow: 0 0 0 2px rgba(184,74,0,0.10), var(--shadow); }
+}
+
+/* EMERGENCY BANNER */
+.emergency-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(100, 0, 0, 0.97);
+  z-index: 300;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px;
+  animation: emergencyIn 0.4s ease;
+}
+.emergency-overlay.show { display: flex; }
+@keyframes emergencyIn { from { opacity:0; transform: scale(0.96); } to { opacity:1; transform: scale(1); } }
+
+.emergency-icon {
+  font-size: 64px;
+  animation: emergencyPulse 0.8s ease-in-out infinite;
+  margin-bottom: 16px;
+}
+@keyframes emergencyPulse {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+.emergency-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+.emergency-sub {
+  font-size: 14px;
+  color: rgba(255,255,255,0.75);
+  text-align: center;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+.emergency-list {
+  width: 100%;
+  max-width: 340px;
+  margin-bottom: 28px;
+}
+.emergency-item {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,100,100,0.4);
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  display: flex; align-items: center; gap: 12px;
+  animation: emergencyItemPulse 1.2s ease-in-out infinite;
+}
+@keyframes emergencyItemPulse {
+  0%,100% { background: rgba(255,255,255,0.08); }
+  50% { background: rgba(255,80,80,0.2); }
+}
+.emergency-item-name { font-size: 15px; font-weight: 600; color: #fff; }
+.emergency-item-info { font-size: 12px; color: rgba(255,200,200,0.85); margin-top: 2px; }
+.emergency-close {
+  background: rgba(255,255,255,0.15);
+  border: 2px solid rgba(255,255,255,0.3);
+  color: white;
+  padding: 14px 36px;
+  border-radius: 14px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+}
+.emergency-close:active { transform: scale(0.97); }
+.product-card.status-alerta { border-left-color: var(--orange); }
+.product-card.status-atencao { border-left-color: var(--yellow); }
+.product-card.status-ok { border-left-color: var(--green); }
+.card-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 10px; gap: 8px; }
+.card-emoji { font-size: 22px; margin-right: 8px; flex-shrink: 0; }
+.card-info { flex: 1; min-width: 0; }
+.card-name { font-weight: 600; font-size: 15px; line-height: 1.2; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card-cat { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+.card-badge { flex-shrink: 0; font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px; white-space: nowrap; }
+.badge-vencido { background: var(--red-bg); color: var(--red); }
+.badge-alerta { background: var(--orange-bg); color: var(--orange); }
+.badge-atencao { background: var(--yellow-bg); color: var(--yellow); }
+.badge-ok { background: var(--green-bg); color: var(--green); }
+.card-details { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+.detail-item { background: var(--cream); border-radius: 10px; padding: 8px; text-align: center; }
+.detail-label { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
+.detail-value { font-size: 13px; font-weight: 600; color: var(--text); }
+.detail-value.warn { color: var(--orange); }
+.detail-value.danger { color: var(--red); }
+.card-actions { display: flex; gap: 8px; margin-top: 10px; }
+.btn-action { flex: 1; padding: 9px 6px; border-radius: 10px; border: none; font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.btn-action:active { transform: scale(0.97); }
+.btn-edit { background: var(--cream2); color: var(--text); }
+.btn-del { background: var(--red-bg); color: var(--red); }
+.btn-stock { background: linear-gradient(135deg, var(--burg) 0%, var(--burg2) 100%); color: var(--gold2); }
+.empty-state { text-align: center; padding: 48px 24px; color: var(--muted); }
+.empty-state .empty-icon { font-size: 48px; margin-bottom: 12px; display: block; }
+.empty-state p { font-size: 14px; line-height: 1.6; }
+.bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; background: var(--white); border-top: 1px solid var(--cream2); display: flex; padding: 10px 0 14px; z-index: 50; box-shadow: 0 -4px 20px rgba(42,26,14,0.08); }
+.nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; background: none; border: none; cursor: pointer; font-family: 'Outfit', sans-serif; font-size: 10px; color: var(--muted); padding: 4px 0; transition: color 0.2s; }
+.nav-item.active { color: var(--burg); font-weight: 600; }
+.nav-icon { font-size: 20px; line-height: 1; }
+.fab { position: fixed; bottom: 82px; right: calc(50% - 230px); width: 56px; height: 56px; background: linear-gradient(135deg, var(--burg) 0%, var(--burg2) 100%); border: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 6px 20px rgba(92,26,42,0.45); font-size: 28px; color: var(--gold2); transition: all 0.2s; z-index: 60; }
+.fab:active { transform: scale(0.92); }
+.overlay { display: none; position: fixed; inset: 0; background: rgba(42,26,14,0.55); z-index: 100; backdrop-filter: blur(2px); animation: fadeIn 0.2s ease; }
+.overlay.open { display: flex; align-items: flex-end; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.sheet { width: 100%; max-width: 480px; margin: 0 auto; background: var(--white); border-radius: 24px 24px 0 0; padding: 20px 20px 28px; animation: sheetUp 0.3s ease; max-height: 92vh; overflow-y: auto; }
+@keyframes sheetUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+.sheet-handle { width: 40px; height: 4px; background: var(--cream2); border-radius: 4px; margin: 0 auto 20px; }
+.sheet-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; color: var(--burg); margin-bottom: 20px; }
+.form-group { margin-bottom: 14px; }
+.form-label { font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; display: block; }
+.form-input, .form-select { width: 100%; padding: 12px 14px; border: 1.5px solid var(--cream2); border-radius: 12px; font-family: 'Outfit', sans-serif; font-size: 15px; color: var(--text); background: var(--cream); outline: none; transition: border-color 0.2s; -webkit-appearance: none; appearance: none; }
+.form-input:focus, .form-select:focus { border-color: var(--burg); background: var(--white); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.btn-primary { width: 100%; padding: 15px; background: linear-gradient(135deg, var(--burg) 0%, var(--burg2) 100%); color: var(--gold2); border: none; border-radius: 14px; font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 4px; transition: all 0.2s; letter-spacing: 0.5px; }
+.btn-primary:active { transform: scale(0.98); opacity: 0.9; }
+.btn-secondary { width: 100%; padding: 14px; background: var(--cream); color: var(--muted); border: 1.5px solid var(--cream2); border-radius: 14px; font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer; margin-top: 8px; }
+.stock-controls { display: flex; align-items: center; gap: 12px; background: var(--cream); border-radius: 14px; padding: 6px; margin-bottom: 16px; }
+.stock-btn { width: 48px; height: 48px; border-radius: 10px; border: none; background: var(--white); font-size: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(42,26,14,0.1); color: var(--burg); font-weight: 700; }
+.stock-qty { flex: 1; text-align: center; font-size: 32px; font-weight: 700; color: var(--text); }
+.dash-card { background: var(--white); border-radius: var(--radius); padding: 16px; margin-bottom: 10px; box-shadow: var(--shadow); }
+.dash-card-title { font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
+.progress-bar-wrap { margin-bottom: 10px; }
+.progress-label { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px; }
+.progress-bar { height: 8px; background: var(--cream2); border-radius: 8px; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 8px; transition: width 0.6s ease; }
+.view { display: none; }
+.view.active { display: block; }
+.toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: var(--burg2); color: var(--gold2); padding: 12px 20px; border-radius: 12px; font-size: 13px; font-weight: 500; z-index: 200; box-shadow: 0 6px 20px rgba(42,26,14,0.25); animation: toastIn 0.3s ease, toastOut 0.3s ease 2.2s both; pointer-events: none; white-space: nowrap; }
+@keyframes toastIn { from { opacity:0; transform: translateX(-50%) translateY(-8px); } to { opacity:1; transform: translateX(-50%) translateY(0); } }
+@keyframes toastOut { to { opacity:0; transform: translateX(-50%) translateY(-8px); } }
+.search-wrap { position: relative; margin-bottom: 12px; }
+.search-wrap input { width: 100%; padding: 11px 14px 11px 38px; border: 1.5px solid var(--cream2); border-radius: 12px; font-family: 'Outfit', sans-serif; font-size: 14px; background: var(--white); color: var(--text); outline: none; }
+.search-wrap input:focus { border-color: var(--burg); }
+.search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 16px; color: var(--muted); pointer-events: none; }
+@keyframes spin { from { display:inline-block; transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+/* SYNC STATUS BAR */
+.sync-bar {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 9px 14px;
+  margin-bottom: 10px;
+  display: flex; align-items: center; justify-content: space-between;
+  box-shadow: var(--shadow);
+  font-size: 12px; color: var(--muted);
+}
+.sync-bar button {
+  background: none; border: 1.5px solid var(--cream2); border-radius: 8px;
+  padding: 3px 10px; font-size: 11px; font-weight: 600;
+  color: var(--burg); cursor: pointer; font-family: 'Outfit', sans-serif;
+}
+
+/* VOICE ALERT BUTTON */
+.voice-btn {
+  position: fixed; top: 16px; right: 16px;
+  width: 38px; height: 38px;
+  border-radius: 50%; border: none;
+  background: rgba(200,168,75,0.18);
+  color: var(--gold2);
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 200;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+  backdrop-filter: blur(4px);
+}
+.voice-btn:active { transform: scale(0.9); }
+.voice-btn.muted { opacity: 0.4; }
+
+/* SPEAKING ANIMATION */
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(200,168,75,0.5); }
+  70% { box-shadow: 0 0 0 12px rgba(200,168,75,0); }
+  100% { box-shadow: 0 0 0 0 rgba(200,168,75,0); }
+}
+.voice-btn.speaking { animation: pulse-ring 1s infinite; background: rgba(200,168,75,0.35); }
+
+/* VOICE ALERT BANNER */
+.alert-banner {
+  display: none;
+  position: fixed; top: 0; left: 50%; transform: translateX(-50%);
+  width: 100%; max-width: 480px;
+  background: linear-gradient(135deg, var(--burg2), var(--burg));
+  color: var(--gold2);
+  padding: 14px 20px 14px 16px;
+  z-index: 180;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+  box-shadow: 0 4px 20px rgba(92,26,42,0.5);
+  border-bottom: 1px solid rgba(200,168,75,0.3);
+  animation: bannerDown 0.3s ease;
+}
+@keyframes bannerDown { from { transform: translateX(-50%) translateY(-100%); } to { transform: translateX(-50%) translateY(0); } }
+.alert-banner.show { display: block; }
+.alert-banner .banner-close {
+  position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+  background: none; border: none; color: var(--gold2); font-size: 18px; cursor: pointer; opacity: 0.7;
+}
+
+/* ACTIVATION MODAL */
+.activate-sheet { text-align: center; }
+.activate-sheet .act-icon { font-size: 52px; display: block; margin-bottom: 12px; }
+.activate-sheet h2 { font-family: 'Cormorant Garamond', serif; font-size: 24px; color: var(--burg); margin-bottom: 8px; }
+.activate-sheet p { font-size: 14px; color: var(--muted); line-height: 1.6; margin-bottom: 20px; }
+
+/* HORÁRIOS CONFIG */
+.horario-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
+.horario-chip {
+  padding: 10px 8px; border-radius: 12px;
+  border: 1.5px solid var(--cream2);
+  background: var(--cream);
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px; font-weight: 500;
+  color: var(--muted); cursor: pointer;
+  text-align: center; transition: all 0.2s;
+}
+.horario-chip.on { background: var(--burg); border-color: var(--burg); color: var(--gold2); }
+
+/* NEXT ALERT INDICATOR */
+.next-alert-bar {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  display: flex; align-items: center; gap: 10px;
+  box-shadow: var(--shadow);
+  font-size: 12px; color: var(--muted);
+}
+.next-alert-bar strong { color: var(--burg); }
+.next-alert-bar .sound-toggle {
+  margin-left: auto;
+  background: none; border: 1.5px solid var(--cream2);
+  border-radius: 8px; padding: 4px 10px;
+  font-size: 11px; font-weight: 600;
+  color: var(--muted); cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <div class="logo">
+      <h1>Trebbiano</h1>
+      <span>Controle de Perecíveis</span>
+    </div>
+    <div class="header-date">
+      <strong id="headerDate">—</strong>
+      <span id="headerTime">—</span>
+      <span id="syncIndicator" style="font-size:10px;display:block;margin-top:2px;transition:color 0.3s">☁️ —</span>
+    </div>
+  </div>
+  <div class="summary">
+    <div class="sum-card vencido" onclick="filterStatus('vencido')">
+      <div class="sum-num" id="countVencido">0</div>
+      <div class="sum-label">Vencidos</div>
+    </div>
+    <div class="sum-card alerta" onclick="filterStatus('alerta')">
+      <div class="sum-num" id="countAlerta">0</div>
+      <div class="sum-label">Próx. 7 dias</div>
+    </div>
+    <div class="sum-card baixo" onclick="filterStatus('baixo')">
+      <div class="sum-num" id="countBaixo">0</div>
+      <div class="sum-label">Est. Baixo</div>
+    </div>
+  </div>
+</div>
+
+<nav class="bottom-nav">
+  <button class="nav-item active" id="nav-produtos" onclick="showView('produtos')">
+    <span class="nav-icon">📦</span>
+    <span>Produtos</span>
+  </button>
+  <button class="nav-item" id="nav-alertas" onclick="showView('alertas')">
+    <span class="nav-icon">🔔</span>
+    <span>Alertas</span>
+  </button>
+  <button class="nav-item" id="nav-relatorios" onclick="showView('relatorios')">
+    <span class="nav-icon">📊</span>
+    <span>Relatórios</span>
+  </button>
+</nav>
+
+<!-- EMERGENCY OVERLAY -->
+<div class="emergency-overlay" id="emergencyOverlay">
+  <div class="emergency-icon">🚨</div>
+  <div class="emergency-title">ATENÇÃO TREBBIANO</div>
+  <div class="emergency-sub" id="emergencySub">Produtos precisam de ação imediata!</div>
+  <div class="emergency-list" id="emergencyList"></div>
+  <button class="emergency-close" onclick="fecharEmergencia()">✓ Entendido — Vou verificar</button>
+</div>
+
+<!-- VOICE TOGGLE BUTTON (fixed in header area) -->
+<button class="voice-btn" id="voiceBtn" onclick="toggleVoice()" title="Alertas de voz">🔊</button>
+
+<!-- ALERT BANNER (appears when speaking) -->
+<div class="alert-banner" id="alertBanner">
+  <span id="bannerText">🔊 Verificando estoque...</span>
+  <button class="banner-close" onclick="closeBanner()">✕</button>
+</div>
+
+<!-- MODAL: ATIVAR VOZ -->
+<div class="overlay" id="overlayActivate">
+  <div class="sheet activate-sheet" onclick="event.stopPropagation()">
+    <div class="sheet-handle"></div>
+    <span class="act-icon">🔊</span>
+    <h2>Ativar Alertas de Voz</h2>
+    <p>O sistema vai falar em voz alta quando houver produtos vencendo ou estoque baixo.<br><br>Toque em <strong>"Ativar Agora"</strong> para ligar os avisos sonoros para os vendedores.</p>
+    <button class="btn-primary" onclick="ativarVoz()">🔊 Ativar Alertas de Voz</button>
+    <button class="btn-secondary" onclick="document.getElementById('overlayActivate').classList.remove('open')">Agora não</button>
+  </div>
+</div>
+
+<!-- MODAL: CONFIG HORÁRIOS -->
+<div class="overlay" id="overlayConfig" onclick="closeConfig(event)">
+  <div class="sheet" onclick="event.stopPropagation()">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title">⚙️ Configurar Alertas de Voz</div>
+    <div class="form-group">
+      <label class="form-label">Horários dos avisos automáticos</label>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:10px">Selecione em quais horários o sistema deve falar automaticamente:</p>
+      <div class="horario-grid" id="horariosGrid"></div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Volume da voz</label>
+      <input type="range" id="volumeRange" min="0.1" max="1" step="0.1" value="1"
+        style="width:100%;accent-color:var(--burg);margin-top:4px"
+        oninput="document.getElementById('volumeLabel').textContent=Math.round(this.value*100)+'%'">
+      <div style="text-align:right;font-size:12px;color:var(--muted);margin-top:2px"><span id="volumeLabel">100%</span></div>
+    </div>
+    <button class="btn-primary" onclick="testarVoz()">▶️ Testar Voz Agora</button>
+    <button class="btn-primary" style="margin-top:8px;background:linear-gradient(135deg,var(--green),#145233)" onclick="salvarConfig()">💾 Salvar Configurações</button>
+    <button class="btn-secondary" onclick="closeConfig()">Fechar</button>
+  </div>
+</div>
+
+<button class="fab" onclick="openAdd()">＋</button>
+
+<!-- VIEW: PRODUTOS -->
+<div class="content view active" id="view-produtos">
+  <div class="section-header">
+    <div>
+      <div class="section-title">Estoque</div>
+      <div class="section-sub" id="totalProdutos">Carregando...</div>
+    </div>
+  </div>
+  <div class="sync-bar">
+    <span>🔄 <span id="syncBarText">Carregando dados da nuvem...</span></span>
+    <button onclick="carregarNuvem(false)">↻ Sincronizar</button>
+    <button onclick="abrirDiagnostico()" style="margin-left:4px;background:rgba(139,26,26,0.1);color:var(--red);border-color:rgba(139,26,26,0.2)">🔧</button>
+  </div>
+  <div class="next-alert-bar" id="nextAlertBar">
+    <span>🔊</span>
+    <span id="nextAlertText">Alertas de voz desativados</span>
+    <button class="sound-toggle" onclick="document.getElementById('overlayConfig').classList.add('open');renderHorarios()">⚙️ Config</button>
+  </div>
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="searchInput" placeholder="Buscar produto ou fornecedor..." oninput="renderProducts()">
+  </div>
+  <div class="filter-bar">
+    <button class="filter-btn active" data-cat="Todos" onclick="setFilter(this,'Todos')">Todos</button>
+    <button class="filter-btn" data-cat="Vinho" onclick="setFilter(this,'Vinho')">🍷 Vinho</button>
+    <button class="filter-btn" data-cat="Queijo" onclick="setFilter(this,'Queijo')">🧀 Queijo</button>
+    <button class="filter-btn" data-cat="Chocolate" onclick="setFilter(this,'Chocolate')">🍫 Chocolate</button>
+    <button class="filter-btn" data-cat="Embutido" onclick="setFilter(this,'Embutido')">🥩 Embutido</button>
+    <button class="filter-btn" data-cat="Conserva" onclick="setFilter(this,'Conserva')">🫙 Conserva</button>
+  </div>
+  <div id="productList"></div>
+</div>
+
+<!-- VIEW: ALERTAS -->
+<div class="content view" id="view-alertas">
+  <div class="section-header">
+    <div>
+      <div class="section-title">Central de Alertas</div>
+      <div class="section-sub">Ações necessárias agora</div>
+    </div>
+  </div>
+  <div id="alertasList"></div>
+</div>
+
+<!-- VIEW: RELATÓRIOS -->
+<div class="content view" id="view-relatorios">
+  <div class="section-header">
+    <div>
+      <div class="section-title">Relatórios</div>
+      <div class="section-sub">Visão geral do estoque</div>
+    </div>
+  </div>
+  <div id="dashContent"></div>
+</div>
+
+<!-- MODAL: ADD/EDIT -->
+<div class="overlay" id="overlayAdd" onclick="closeAdd(event)">
+  <div class="sheet" onclick="event.stopPropagation()">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title" id="sheetTitle">➕ Novo Produto</div>
+    <input type="hidden" id="editId">
+    <div class="form-group">
+      <label class="form-label">Nome do Produto *</label>
+      <input class="form-input" id="fNome" type="text" placeholder="Ex: Queijo Brie Président">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Categoria *</label>
+      <select class="form-select" id="fCat">
+        <option value="">Selecione a categoria...</option>
+        <option value="Vinho">🍷 Vinho (espumante, branco, rosé...)</option>
+        <option value="Queijo">🧀 Queijo & Frio</option>
+        <option value="Chocolate">🍫 Chocolate & Doce Fino</option>
+        <option value="Embutido">🥩 Embutido</option>
+        <option value="Conserva">🫙 Conserva</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Data de Validade *</label>
+        <input class="form-input" id="fValidade" type="date">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Quantidade</label>
+        <input class="form-input" id="fQtd" type="number" placeholder="0" min="0">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Estoque Mínimo</label>
+        <input class="form-input" id="fMin" type="number" placeholder="5" min="0">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Unidade</label>
+        <select class="form-select" id="fUnidade">
+          <option value="un">Unidade</option>
+          <option value="kg">Kg</option>
+          <option value="g">Gramas</option>
+          <option value="cx">Caixas</option>
+          <option value="pct">Pacotes</option>
+          <option value="L">Litros</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Fornecedor</label>
+      <input class="form-input" id="fFornecedor" type="text" placeholder="Ex: Distribuidora XYZ">
+    </div>
+    <button class="btn-primary" onclick="saveProduct()">💾 Salvar Produto</button>
+    <button class="btn-secondary" onclick="closeAdd()">Cancelar</button>
+  </div>
+</div>
+
+<!-- MODAL: ESTOQUE RÁPIDO -->
+<div class="overlay" id="overlayStock" onclick="closeStock(event)">
+  <div class="sheet" onclick="event.stopPropagation()">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title">📦 Atualizar Estoque</div>
+    <div style="text-align:center; font-size:14px; color:var(--muted); margin-bottom:14px; font-weight:500;" id="stockProductName">—</div>
+    <div class="stock-controls">
+      <button class="stock-btn" onclick="changeStock(-1)">−</button>
+      <div class="stock-qty" id="stockQty">0</div>
+      <button class="stock-btn" onclick="changeStock(1)">＋</button>
+    </div>
+    <div style="font-size:12px; color:var(--muted); text-align:center; margin-bottom:18px;">
+      Estoque mínimo recomendado: <strong id="stockMin">—</strong>
+    </div>
+    <button class="btn-primary" onclick="saveStock()">✅ Confirmar Atualização</button>
+    <button class="btn-secondary" onclick="closeStock()">Cancelar</button>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// CONFIGURAÇÃO DA NUVEM (Google Sheets)
+// ============================================================
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxwrx2SseCXfoK25-awhtjvc86coH3U4b8UDb0fAP8Bb7CwFx8taHVlQdKd9RVDiAe1Cw/exec';
+
+// ============================================================
+// DADOS E ESTADO
+// ============================================================
+let products = [];
+let syncStatus = 'idle'; // idle | syncing | ok | error
+let lastSync = null;
+let activeFilter = 'Todos';
+let activeStatusFilter = null;
+let editingId = null;
+let stockEditId = null;
+let tempStockQty = 0;
+let syncInterval = null;
+
+const EMOJIS = { Vinho:'🍷', Queijo:'🧀', Chocolate:'🍫', Embutido:'🥩', Conserva:'🫙' };
+
+// ── Cache local (fallback offline) ──────────────────────────
+function salvarCache(){ localStorage.setItem('trebbiano_cache', JSON.stringify(products)); }
+function carregarCache(){ return JSON.parse(localStorage.getItem('trebbiano_cache') || '[]'); }
+
+// ── Indicador de sincronização ───────────────────────────────
+function setSyncUI(status, msg){
+  syncStatus = status;
+  const el = document.getElementById('syncIndicator');
+  if(!el) return;
+  const icons = { syncing:'⟳', ok:'☁️', error:'⚠️', offline:'📴' };
+  const colors = { syncing:'var(--muted)', ok:'var(--green)', error:'var(--orange)', offline:'var(--muted)' };
+  el.textContent = (icons[status]||'') + ' ' + (msg||'');
+  el.style.color = colors[status] || 'var(--muted)';
+  if(status === 'syncing') el.style.animation = 'spin 1s linear infinite';
+  else el.style.animation = 'none';
+  const barEl = document.getElementById('syncBarText');
+  if(barEl) barEl.textContent = msg || '';
+}
+
+// ── Buscar dados da nuvem ────────────────────────────────────
+async function carregarNuvem(silencioso = false){
+  if(!silencioso) setSyncUI('syncing', 'Sincronizando...');
+  try {
+    const resp = await fetch(SHEETS_URL + '?action=read', {
+      method: 'GET',
+      cache: 'no-store'
+    });
+    if(!resp.ok) throw new Error('HTTP ' + resp.status);
+    const text = await resp.text();
+    const data = JSON.parse(text);
+    if(data.error) throw new Error(data.error);
+
+    // Normaliza todas as datas ao carregar da nuvem
+    products = (data.products || []).map(p => ({
+      ...p,
+      validade: normalizarData(p.validade) || p.validade
+    }));
+    salvarCache();
+    lastSync = new Date();
+    setSyncUI('ok', 'Atualizado ' + lastSync.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}));
+    atualizarContadores();
+    renderProducts();
+    verificarEmergencias(silencioso);
+    if(!silencioso) showToast('☁️ Dados sincronizados!');
+    return true;
+  } catch(err) {
+    const cache = carregarCache();
+    if(cache.length > 0 && products.length === 0){
+      products = cache;
+      atualizarContadores();
+      renderProducts();
+    }
+    setSyncUI('error', 'Sem conexão — cache local');
+    if(!silencioso) showToast('📴 Sem internet. Usando dados locais.');
+    return false;
+  }
+}
+
+// ── Salvar dados na nuvem ────────────────────────────────────
+async function salvar(){
+  salvarCache(); // salva local imediatamente
+  setSyncUI('syncing', 'Salvando...');
+  try {
+    // Usa GET com dados codificados (máxima compatibilidade Android/iOS)
+    const encoded = encodeURIComponent(JSON.stringify(products));
+    const url = SHEETS_URL + '?action=write&data=' + encoded;
+    const resp = await fetch(url, { method: 'GET' });
+    if(!resp.ok) throw new Error('HTTP ' + resp.status);
+    const text = await resp.text();
+    const data = JSON.parse(text);
+    if(data.error) throw new Error(data.error);
+    lastSync = new Date();
+    setSyncUI('ok', 'Salvo ' + lastSync.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}));
+    return true;
+  } catch(err) {
+    setSyncUI('error', 'Sem conexão — salvo localmente');
+    showToast('⚠️ Sem internet. Produto salvo no celular.');
+    return false;
+  }
+}
+
+// ── Auto-sync a cada 60 segundos ─────────────────────────────
+function iniciarAutoSync(){
+  if(syncInterval) clearInterval(syncInterval);
+  syncInterval = setInterval(() => carregarNuvem(true), 60000);
+}
+
+// ============================================================
+// RELÓGIO
+// ============================================================
+function updateClock(){
+  const now = new Date();
+  document.getElementById('headerDate').textContent = now.toLocaleDateString('pt-BR',{weekday:'short',day:'numeric',month:'short'});
+  document.getElementById('headerTime').textContent = now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+}
+setInterval(updateClock, 1000); updateClock();
+
+// ============================================================
+// LÓGICA DE STATUS
+// ============================================================
+// Normaliza QUALQUER formato de data para YYYY-MM-DD
+function normalizarData(val) {
+  if(!val) return null;
+  val = val.toString().trim();
+
+  // Já está no formato YYYY-MM-DD
+  if(/^\d{4}-\d{2}-\d{2}$/.test(val)) return val;
+
+  // Formato DD/MM/YYYY
+  if(/^\d{2}\/\d{2}\/\d{4}$/.test(val)) {
+    const p = val.split('/');
+    return p[2]+'-'+p[1]+'-'+p[0];
+  }
+
+  // Formato DD/MM/YY
+  if(/^\d{2}\/\d{2}\/\d{2}$/.test(val)) {
+    const p = val.split('/');
+    const ano = parseInt(p[2]) < 50 ? '20'+p[2] : '19'+p[2];
+    return ano+'-'+p[1]+'-'+p[0];
+  }
+
+  // ISO string com T (ex: 2025-01-15T00:00:00.000Z)
+  if(val.includes('T')) {
+    try {
+      const d = new Date(val);
+      if(!isNaN(d.getTime())) {
+        const ano = d.getFullYear();
+        const mes = String(d.getMonth()+1).padStart(2,'0');
+        const dia = String(d.getDate()).padStart(2,'0');
+        return (ano < 2000 ? new Date().getFullYear() : ano)+'-'+mes+'-'+dia;
+      }
+    } catch(e) {}
+  }
+
+  // Formato por extenso do JS: "Fri Mar 27 2026 00:00:00 GMT-0300..."
+  // ou parcial: "Tue Mar 26"
+  if(/^[A-Z][a-z]{2}\s[A-Z][a-z]{2}\s\d{1,2}/.test(val)) {
+    try {
+      const d = new Date(val);
+      if(!isNaN(d.getTime())) {
+        let ano = d.getFullYear();
+        // Se o ano é < 2000 ou absurdo, usa ano atual
+        if(ano < 2020 || ano > 2100) ano = new Date().getFullYear();
+        const mes = String(d.getMonth()+1).padStart(2,'0');
+        const dia = String(d.getDate()).padStart(2,'0');
+        return ano+'-'+mes+'-'+dia;
+      }
+    } catch(e) {}
+  }
+
+  // Tenta qualquer conversão via Date como último recurso
+  try {
+    const d = new Date(val);
+    if(!isNaN(d.getTime())) {
+      let ano = d.getFullYear();
+      if(ano < 2020 || ano > 2100) ano = new Date().getFullYear();
+      const mes = String(d.getMonth()+1).padStart(2,'0');
+      const dia = String(d.getDate()).padStart(2,'0');
+      return ano+'-'+mes+'-'+dia;
+    }
+  } catch(e) {}
+
+  return null;
+}
+
+function getDias(validade){
+  const norm = normalizarData(validade);
+  if(!norm) return 9999; // data inválida = trata como longe
+  const hoje = new Date(); hoje.setHours(0,0,0,0);
+  const v = new Date(norm + 'T00:00:00');
+  if(isNaN(v.getTime())) return 9999;
+  return Math.round((v - hoje)/(1000*60*60*24));
+}
+function getStatus(p){
+  const d = getDias(p.validade);
+  if(d < 0) return 'vencido';
+  if(d <= 7) return 'alerta';
+  if(d <= 30) return 'atencao';
+  return 'ok';
+}
+function getLabel(p){
+  const d = getDias(p.validade);
+  if(d < 0) return `Vencido há ${Math.abs(d)}d`;
+  if(d === 0) return 'Vence HOJE!';
+  if(d === 1) return 'Vence amanhã!';
+  if(d <= 7) return `Vence em ${d} dias`;
+  if(d <= 30) return `${d} dias`;
+  return `${d} dias`;
+}
+function badgeClass(st){ return {vencido:'badge-vencido',alerta:'badge-alerta',atencao:'badge-atencao',ok:'badge-ok'}[st]; }
+function estoquesBaixo(p){ return p.qtd <= p.min; }
+
+// ============================================================
+// CONTADORES DO HEADER
+// ============================================================
+function atualizarContadores(){
+  document.getElementById('countVencido').textContent = products.filter(p=>getStatus(p)==='vencido').length;
+  document.getElementById('countAlerta').textContent = products.filter(p=>getStatus(p)==='alerta').length;
+  document.getElementById('countBaixo').textContent = products.filter(p=>estoquesBaixo(p)).length;
+  document.getElementById('totalProdutos').textContent = `${products.length} produto${products.length!==1?'s':''} cadastrado${products.length!==1?'s':''}`;
+}
+
+// ============================================================
+// FILTRO RÁPIDO DO HEADER
+// ============================================================
+function filterStatus(s){
+  activeStatusFilter = (activeStatusFilter===s)?null:s;
+  activeFilter = 'Todos';
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.toggle('active', b.dataset.cat==='Todos'));
+  showView('produtos');
+  renderProducts();
+}
+
+// ============================================================
+// RENDERIZAR PRODUTOS
+// ============================================================
+function renderProducts(){
+  const busca = (document.getElementById('searchInput')?.value||'').toLowerCase();
+  let lista = products.filter(p=>{
+    const cat = activeFilter==='Todos' || p.cat===activeFilter;
+    const srch = !busca || p.nome.toLowerCase().includes(busca) || (p.fornecedor||'').toLowerCase().includes(busca);
+    let st = true;
+    if(activeStatusFilter==='vencido') st = getStatus(p)==='vencido';
+    else if(activeStatusFilter==='alerta') st = getStatus(p)==='alerta';
+    else if(activeStatusFilter==='baixo') st = estoquesBaixo(p);
+    return cat && srch && st;
+  }).sort((a,b)=>getDias(a.validade)-getDias(b.validade));
+
+  const el = document.getElementById('productList');
+  if(!lista.length){
+    el.innerHTML=`<div class="empty-state"><span class="empty-icon">🍾</span><p>Nenhum produto encontrado.<br>Toque em <strong>＋</strong> para cadastrar.</p></div>`;
+    return;
+  }
+  el.innerHTML = lista.map((p,i)=>{
+    const st = getStatus(p);
+    const dias = getDias(p.validade);
+    const baixo = estoquesBaixo(p);
+    const vNorm = normalizarData(p.validade); const dataFmt = vNorm ? new Date(vNorm+'T00:00:00').toLocaleDateString('pt-BR') : 'Data inválida';
+    return `
+    <div class="product-card status-${st}" style="animation-delay:${i*0.04}s">
+      <div class="card-top">
+        <div style="display:flex;align-items:flex-start;flex:1;min-width:0">
+          <span class="card-emoji">${EMOJIS[p.cat]||'📦'}</span>
+          <div class="card-info">
+            <div class="card-name">${p.nome}</div>
+            <div class="card-cat">${p.cat}${p.fornecedor?' · '+p.fornecedor:''}</div>
+          </div>
+        </div>
+        <span class="card-badge ${badgeClass(st)}">${getLabel(p)}</span>
+      </div>
+      <div class="card-details">
+        <div class="detail-item">
+          <div class="detail-label">Estoque</div>
+          <div class="detail-value ${baixo?'danger':''}">${p.qtd} ${p.unidade}${baixo?' ⚠️':''}</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Validade</div>
+          <div class="detail-value ${st==='vencido'?'danger':st==='alerta'?'warn':''}" style="font-size:12px">${dataFmt}</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Mínimo</div>
+          <div class="detail-value">${p.min} ${p.unidade}</div>
+        </div>
+      </div>
+      <div class="card-actions">
+        <button class="btn-action btn-stock" onclick="openStock(${p.id})">📦 Estoque</button>
+        <button class="btn-action btn-edit" onclick="openEdit(${p.id})">✏️ Editar</button>
+        <button class="btn-action btn-del" onclick="excluir(${p.id})">🗑️</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ============================================================
+// VIEW: ALERTAS
+// ============================================================
+function renderAlertas(){
+  const urgentes = products.filter(p=>['vencido','alerta'].includes(getStatus(p))).sort((a,b)=>getDias(a.validade)-getDias(b.validade));
+  const baixos = products.filter(p=>estoquesBaixo(p));
+  let html = '';
+
+  if(urgentes.length){
+    html += `<div class="dash-card-title" style="padding:0 0 4px">🚨 Vencimento Urgente — ${urgentes.length} produto${urgentes.length>1?'s':''}</div>`;
+    urgentes.forEach(p=>{
+      const st=getStatus(p);
+      html += `
+      <div class="product-card status-${st}" style="margin-bottom:8px">
+        <div class="card-top">
+          <div style="display:flex;align-items:center;gap:8px;flex:1">
+            <span style="font-size:24px">${EMOJIS[p.cat]||'📦'}</span>
+            <div class="card-info"><div class="card-name">${p.nome}</div><div class="card-cat">${p.cat}</div></div>
+          </div>
+          <span class="card-badge ${badgeClass(st)}">${getLabel(p)}</span>
+        </div>
+        <div style="font-size:12px;color:var(--muted);margin-top:4px">
+          Validade: <strong>${(()=>{const n=normalizarData(p.validade);return n?new Date(n+'T00:00:00').toLocaleDateString('pt-BR'):'Inválida'})()}</strong> &nbsp;·&nbsp; Estoque: <strong>${p.qtd} ${p.unidade}</strong>
+        </div>
+      </div>`;
+    });
+  }
+
+  if(baixos.length){
+    html += `<div class="dash-card-title" style="margin-top:20px;padding-bottom:4px">📉 Estoque Abaixo do Mínimo — ${baixos.length} produto${baixos.length>1?'s':''}</div>`;
+    baixos.forEach(p=>{
+      const pct = Math.min(100, Math.round(p.qtd/Math.max(p.min,1)*100));
+      html += `
+      <div class="dash-card" style="margin-bottom:8px;border-left:4px solid #2060A8">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <div>
+            <div style="font-weight:600;font-size:14px">${EMOJIS[p.cat]||'📦'} ${p.nome}</div>
+            <div style="font-size:11px;color:var(--muted)">${p.cat}${p.fornecedor?' · '+p.fornecedor:''}</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:22px;font-weight:700;color:${p.qtd===0?'var(--red)':'#2060A8'}">${p.qtd}</div>
+            <div style="font-size:10px;color:var(--muted)">mín: ${p.min} ${p.unidade}</div>
+          </div>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width:${pct}%;background:${p.qtd===0?'var(--red)':'#2060A8'}"></div></div>
+        <div style="font-size:10px;color:var(--muted);text-align:right;margin-top:3px">${pct}% do mínimo</div>
+      </div>`;
+    });
+  }
+
+  if(!urgentes.length && !baixos.length){
+    html = `<div class="empty-state"><span class="empty-icon">✅</span><p>Tudo em ordem!<br>Nenhum alerta no momento.</p></div>`;
+  }
+
+  document.getElementById('alertasList').innerHTML = html;
+}
+
+// ============================================================
+// VIEW: RELATÓRIOS
+// ============================================================
+function renderRelatorios(){
+  const total = products.length || 1;
+  const sc = {ok:0,atencao:0,alerta:0,vencido:0};
+  products.forEach(p=>sc[getStatus(p)]++);
+  const cats = ['Vinho','Queijo','Chocolate','Embutido','Conserva'];
+  const catData = cats.map(c=>({name:c,count:products.filter(p=>p.cat===c).length,emoji:EMOJIS[c]})).filter(c=>c.count>0);
+  const maxCat = Math.max(...catData.map(c=>c.count),1);
+  const fefo = [...products].sort((a,b)=>getDias(a.validade)-getDias(b.validade)).slice(0,6);
+  const forn = [...new Set(products.map(p=>p.fornecedor).filter(Boolean))];
+
+  document.getElementById('dashContent').innerHTML = `
+  <div class="dash-card">
+    <div class="dash-card-title">📊 Status Geral do Estoque</div>
+    ${[
+      {l:'✅ Em dia (OK)',v:sc.ok,c:'var(--green)'},
+      {l:'🟡 Atenção (até 30 dias)',v:sc.atencao,c:'var(--yellow)'},
+      {l:'🔶 Alerta (até 7 dias)',v:sc.alerta,c:'var(--orange)'},
+      {l:'🔴 Vencidos',v:sc.vencido,c:'var(--red)'},
+    ].map(s=>`
+    <div class="progress-bar-wrap">
+      <div class="progress-label"><span>${s.l}</span><span><strong>${s.v}</strong> produto${s.v!==1?'s':''}</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:${Math.round(s.v/total*100)}%;background:${s.c}"></div></div>
+    </div>`).join('')}
+  </div>
+
+  <div class="dash-card">
+    <div class="dash-card-title">🗂️ Produtos por Categoria</div>
+    ${catData.map(c=>`
+    <div class="progress-bar-wrap">
+      <div class="progress-label"><span>${c.emoji} ${c.name}</span><span><strong>${c.count}</strong></span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:${Math.round(c.count/maxCat*100)}%;background:var(--burg)"></div></div>
+    </div>`).join('')}
+  </div>
+
+  <div class="dash-card">
+    <div class="dash-card-title">🚦 FEFO — Usar Primeiro</div>
+    <div style="font-size:11px;color:var(--muted);margin-bottom:10px">Método de gestão: o que vence antes, sai primeiro</div>
+    ${fefo.map((p,i)=>{
+      const d=getDias(p.validade), st=getStatus(p);
+      const col=st==='vencido'?'var(--red)':st==='alerta'?'var(--orange)':st==='atencao'?'var(--yellow)':'var(--green)';
+      const txt=d<0?'Vencido':d===0?'Hoje':d+'d';
+      return `<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--cream2)">
+        <div style="font-size:16px;font-weight:700;color:var(--muted);width:18px;text-align:center">${i+1}</div>
+        <div style="font-size:18px">${EMOJIS[p.cat]||'📦'}</div>
+        <div style="flex:1"><div style="font-size:13px;font-weight:600">${p.nome}</div><div style="font-size:11px;color:var(--muted)">${(()=>{const n=normalizarData(p.validade);return n?new Date(n+'T00:00:00').toLocaleDateString('pt-BR'):'Inválida'})()}</div></div>
+        <div style="font-size:13px;font-weight:700;color:${col}">${txt}</div>
+      </div>`;
+    }).join('')}
+  </div>
+
+  <div class="dash-card">
+    <div class="dash-card-title">📦 Resumo Rápido</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      ${[
+        {i:'📦',v:products.length,l:'Total de produtos'},
+        {i:'📉',v:products.filter(p=>estoquesBaixo(p)).length,l:'Estoque baixo'},
+        {i:'🗂️',v:catData.length,l:'Categorias'},
+        {i:'🤝',v:forn.length,l:'Fornecedores'},
+      ].map(s=>`<div style="background:var(--cream);border-radius:12px;padding:14px;text-align:center">
+        <div style="font-size:24px">${s.i}</div>
+        <div style="font-size:26px;font-weight:700;color:var(--burg);line-height:1.1">${s.v}</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px">${s.l}</div>
+      </div>`).join('')}
+    </div>
+  </div>`;
+}
+
+// ============================================================
+// NAVEGAÇÃO ENTRE VIEWS
+// ============================================================
+function showView(v){
+  document.querySelectorAll('.view').forEach(el=>el.classList.remove('active'));
+  document.getElementById('view-'+v).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(el=>el.classList.toggle('active', el.id==='nav-'+v));
+  if(v==='produtos') renderProducts();
+  if(v==='alertas') renderAlertas();
+  if(v==='relatorios') renderRelatorios();
+  if(v!=='produtos') activeStatusFilter=null;
+}
+
+function setFilter(btn, cat){
+  activeFilter=cat; activeStatusFilter=null;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.toggle('active', b.dataset.cat===cat));
+  renderProducts();
+}
+
+// ============================================================
+// MODAL: ADICIONAR / EDITAR
+// ============================================================
+function openAdd(){
+  editingId=null;
+  document.getElementById('sheetTitle').textContent='➕ Novo Produto';
+  ['fNome','fValidade','fFornecedor'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('fCat').value='';
+  document.getElementById('fQtd').value='';
+  document.getElementById('fMin').value='5';
+  document.getElementById('fUnidade').value='un';
+  document.getElementById('overlayAdd').classList.add('open');
+}
+function openEdit(id){
+  const p=products.find(x=>x.id===id); if(!p)return;
+  editingId=id;
+  document.getElementById('sheetTitle').textContent='✏️ Editar Produto';
+  document.getElementById('fNome').value=p.nome;
+  document.getElementById('fCat').value=p.cat;
+  document.getElementById('fValidade').value=normalizarData(p.validade)||p.validade;
+  document.getElementById('fQtd').value=p.qtd;
+  document.getElementById('fMin').value=p.min;
+  document.getElementById('fUnidade').value=p.unidade||'un';
+  document.getElementById('fFornecedor').value=p.fornecedor||'';
+  document.getElementById('overlayAdd').classList.add('open');
+}
+function closeAdd(e){
+  if(!e||e.target===document.getElementById('overlayAdd'))
+    document.getElementById('overlayAdd').classList.remove('open');
+}
+function saveProduct(){
+  const nome=document.getElementById('fNome').value.trim();
+  const cat=document.getElementById('fCat').value;
+  const validade=document.getElementById('fValidade').value;
+  const qtd=parseInt(document.getElementById('fQtd').value)||0;
+  const min=parseInt(document.getElementById('fMin').value)||0;
+  const unidade=document.getElementById('fUnidade').value;
+  const fornecedor=document.getElementById('fFornecedor').value.trim();
+  if(!nome||!cat||!validade){showToast('⚠️ Preencha nome, categoria e validade!');return;}
+  if(editingId){
+    const idx=products.findIndex(x=>x.id===editingId);
+    products[idx]={...products[idx],nome,cat,validade,qtd,min,unidade,fornecedor};
+    showToast('✅ Produto atualizado!');
+  } else {
+    const newId=Math.max(0,...products.map(x=>x.id))+1;
+    products.push({id:newId,nome,cat,validade,qtd,min,unidade,fornecedor});
+    showToast('✅ Produto cadastrado!');
+  }
+  salvar(); atualizarContadores();
+  document.getElementById('overlayAdd').classList.remove('open');
+  renderProducts();
+}
+function excluir(id){
+  if(!confirm('Remover este produto do controle?'))return;
+  products=products.filter(x=>x.id!==id);
+  salvar(); atualizarContadores(); renderProducts();
+  showToast('🗑️ Produto removido');
+}
+
+// ============================================================
+// MODAL: ESTOQUE RÁPIDO
+// ============================================================
+function openStock(id){
+  const p=products.find(x=>x.id===id); if(!p)return;
+  stockEditId=id; tempStockQty=p.qtd;
+  document.getElementById('stockProductName').textContent=`${EMOJIS[p.cat]||'📦'} ${p.nome}`;
+  document.getElementById('stockQty').textContent=tempStockQty;
+  document.getElementById('stockMin').textContent=`${p.min} ${p.unidade}`;
+  document.getElementById('overlayStock').classList.add('open');
+}
+function changeStock(d){
+  tempStockQty=Math.max(0,tempStockQty+d);
+  document.getElementById('stockQty').textContent=tempStockQty;
+}
+function saveStock(){
+  const idx=products.findIndex(x=>x.id===stockEditId);
+  products[idx].qtd=tempStockQty;
+  salvar(); atualizarContadores(); renderProducts();
+  document.getElementById('overlayStock').classList.remove('open');
+  showToast(`📦 Estoque: ${tempStockQty} ${products[idx].unidade}`);
+}
+function closeStock(e){
+  if(!e||e.target===document.getElementById('overlayStock'))
+    document.getElementById('overlayStock').classList.remove('open');
+}
+
+// ============================================================
+// TOAST NOTIFICATION
+// ============================================================
+function showToast(msg){
+  const t=document.createElement('div');
+  t.className='toast'; t.textContent=msg;
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(),2700);
+}
+
+// ============================================================
+
+// ============================================================
+// SISTEMA DE ALERTAS DE VOZ
+// ============================================================
+
+const HORARIOS_PADRAO = ['08:00','10:00','12:00','14:00','16:00','18:00','20:00'];
+
+let vozConfig = JSON.parse(localStorage.getItem('trebbiano_voz') || 'null') || {
+  ativo: false,
+  horarios: ['09:00','11:00','13:00','15:00','17:00','19:00'],
+  volume: 1.0
+};
+let vozTimerInterval = null;
+let ultimoAlertaFalado = null;
+
+function falar(texto, urgente = false) {
+  if(!vozConfig.ativo) return;
+  if(!window.speechSynthesis) { showToast('Este navegador nao suporta voz'); return; }
+  window.speechSynthesis.cancel();
+  const msg = new SpeechSynthesisUtterance(texto);
+  msg.lang = 'pt-BR';
+  msg.rate = urgente ? 0.88 : 0.92;
+  msg.pitch = 1.0;
+  msg.volume = vozConfig.volume || 1.0;
+  const vozes = window.speechSynthesis.getVoices();
+  const vozPT = vozes.find(v => v.lang.startsWith('pt')) || vozes.find(v => v.lang.startsWith('en'));
+  if(vozPT) msg.voice = vozPT;
+  msg.onstart = () => {
+    document.getElementById('voiceBtn').classList.add('speaking');
+    document.getElementById('alertBanner').classList.add('show');
+    document.getElementById('bannerText').textContent = '🔊 ' + texto;
+  };
+  msg.onend = () => {
+    document.getElementById('voiceBtn').classList.remove('speaking');
+    setTimeout(closeBanner, 3000);
+  };
+  window.speechSynthesis.speak(msg);
+}
+
+function montarTextoAviso() {
+  const vencidos = products.filter(p => getStatus(p) === 'vencido');
+  const hojeLista = products.filter(p => getDias(p.validade) === 0);
+  const alerta7 = products.filter(p => { const d = getDias(p.validade); return d > 0 && d <= 7; });
+  const baixos = products.filter(p => estoquesBaixo(p) && getStatus(p) !== 'vencido');
+  const partes = [];
+  if(vencidos.length > 0) {
+    const nomes = vencidos.slice(0,2).map(p=>p.nome).join(' e ');
+    partes.push('Atencao equipe Trebbiano! ' + (vencidos.length === 1 ? 'O produto ' + nomes + ' esta vencido' : vencidos.length + ' produtos estao vencidos, incluindo ' + nomes) + '. Retirar do estoque imediatamente.');
+  }
+  if(hojeLista.length > 0) {
+    const nomes = hojeLista.slice(0,2).map(p=>p.nome).join(' e ');
+    partes.push('Urgente! ' + (hojeLista.length === 1 ? nomes + ' vence hoje' : hojeLista.length + ' produtos vencem hoje') + '. Use ou retire imediatamente.');
+  } else if(alerta7.length > 0) {
+    const nomes = alerta7.slice(0,2).map(p=>p.nome).join(' e ');
+    partes.push((alerta7.length === 1 ? nomes + ' vence em menos de 7 dias' : alerta7.length + ' produtos vencem em menos de 7 dias, incluindo ' + nomes) + '. Priorize a venda.');
+  }
+  if(baixos.length > 0) {
+    const nomes = baixos.slice(0,2).map(p=>p.nome).join(' e ');
+    partes.push('Estoque baixo: ' + (baixos.length === 1 ? nomes : baixos.length + ' produtos abaixo do minimo, incluindo ' + nomes) + '. Verificar reposicao.');
+  }
+  if(partes.length === 0) return null;
+  return partes.join(' ');
+}
+
+function dispararAviso(forcado = false) {
+  const texto = montarTextoAviso();
+  if(!texto) {
+    if(forcado) falar('Trebbiano: todos os produtos estao em dia. Nenhuma acao necessaria no momento.');
+    return;
+  }
+  const urgente = products.some(p => getStatus(p)==='vencido' || getDias(p.validade)===0);
+  falar(texto, urgente);
+  // Vibra junto com a voz
+  if(urgente) vibrar([300, 100, 300, 100, 300]);
+  else vibrar([150, 100, 150]);
+  // Notificação push junto com a voz
+  const nomes = products.filter(p=>getStatus(p)==='vencido'||getDias(p.validade)===0).slice(0,2).map(p=>p.nome).join(' e ');
+  if(nomes) enviarNotificacao('🔊 Trebbiano — Aviso de voz ativo', nomes, urgente);
+  // Mostra emergência se houver vencidos (não forçado = aviso automático)
+  if(urgente && !forcado) setTimeout(() => mostrarEmergencia(), 3000);
+}
+
+function iniciarTimer() {
+  if(vozTimerInterval) clearInterval(vozTimerInterval);
+  vozTimerInterval = setInterval(() => {
+    if(!vozConfig.ativo) return;
+    const agora = new Date();
+    const hhmm = agora.getHours().toString().padStart(2,'0') + ':' + agora.getMinutes().toString().padStart(2,'0');
+    if(vozConfig.horarios.includes(hhmm) && ultimoAlertaFalado !== hhmm) {
+      ultimoAlertaFalado = hhmm;
+      dispararAviso();
+      atualizarProximoAviso();
+    }
+  }, 30000);
+}
+
+function atualizarProximoAviso() {
+  const el = document.getElementById('nextAlertText');
+  if(!el) return;
+  if(!vozConfig.ativo) { el.textContent = 'Alertas de voz desativados'; return; }
+  const agora = new Date();
+  const agoraMin = agora.getHours()*60 + agora.getMinutes();
+  const sorted = [...vozConfig.horarios].sort();
+  const proximo = sorted.find(h => {
+    const [hh,mm] = h.split(':').map(Number);
+    return (hh*60+mm) > agoraMin;
+  }) || sorted[0];
+  if(proximo) el.textContent = 'Proximo aviso as ' + proximo;
+  else el.textContent = 'Alertas de voz ativos';
+}
+
+function ativarVoz() {
+  vozConfig.ativo = true;
+  localStorage.setItem('trebbiano_voz', JSON.stringify(vozConfig));
+  document.getElementById('overlayActivate').classList.remove('open');
+  document.getElementById('voiceBtn').classList.remove('muted');
+  iniciarTimer();
+  atualizarProximoAviso();
+  showToast('🔊 Alertas de voz ativados!');
+  setTimeout(() => dispararAviso(), 800);
+}
+
+function toggleVoice() {
+  if(!vozConfig.ativo) {
+    document.getElementById('overlayActivate').classList.add('open');
+  } else {
+    vozConfig.ativo = false;
+    localStorage.setItem('trebbiano_voz', JSON.stringify(vozConfig));
+    window.speechSynthesis.cancel();
+    document.getElementById('voiceBtn').classList.add('muted');
+    document.getElementById('alertBanner').classList.remove('show');
+    document.getElementById('voiceBtn').classList.remove('speaking');
+    atualizarProximoAviso();
+    showToast('🔇 Alertas de voz desativados');
+  }
+}
+
+function closeBanner() {
+  document.getElementById('alertBanner').classList.remove('show');
+}
+
+const TODOS_HORARIOS = ['07:00','08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00','21:00'];
+
+function renderHorarios() {
+  const grid = document.getElementById('horariosGrid');
+  grid.innerHTML = TODOS_HORARIOS.map(h =>
+    '<button class="horario-chip ' + (vozConfig.horarios.includes(h)?'on':'') + '" onclick="toggleHorario(this,\'' + h + '\')">' + h + '</button>'
+  ).join('');
+  document.getElementById('volumeRange').value = vozConfig.volume || 1;
+  document.getElementById('volumeLabel').textContent = Math.round((vozConfig.volume||1)*100)+'%';
+}
+
+function toggleHorario(btn, h) {
+  const idx = vozConfig.horarios.indexOf(h);
+  if(idx > -1) vozConfig.horarios.splice(idx,1);
+  else vozConfig.horarios.push(h);
+  btn.classList.toggle('on');
+}
+
+function salvarConfig() {
+  vozConfig.volume = parseFloat(document.getElementById('volumeRange').value);
+  localStorage.setItem('trebbiano_voz', JSON.stringify(vozConfig));
+  closeConfig();
+  atualizarProximoAviso();
+  if(vozConfig.ativo) iniciarTimer();
+  showToast('✅ Configuracoes salvas!');
+}
+
+function testarVoz() {
+  const bakAtivo = vozConfig.ativo;
+  vozConfig.ativo = true;
+  dispararAviso(true);
+  vozConfig.ativo = bakAtivo;
+}
+
+function closeConfig(e) {
+  if(!e || e.target === document.getElementById('overlayConfig'))
+    document.getElementById('overlayConfig').classList.remove('open');
+}
+
+if(window.speechSynthesis) {
+  window.speechSynthesis.getVoices();
+  window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+}
+
+// ============================================================
+// VIBRAÇÃO
+// ============================================================
+function vibrar(padrao){
+  if(navigator.vibrate) navigator.vibrate(padrao || [300, 100, 300]);
+}
+
+// ============================================================
+// NOTIFICAÇÕES PUSH (mesmo com app fechado)
+// ============================================================
+let notifPermissao = false;
+
+async function pedirPermissaoNotificacao(){
+  if(!('Notification' in window)) return;
+  if(Notification.permission === 'granted'){ notifPermissao = true; return; }
+  if(Notification.permission !== 'denied'){
+    const result = await Notification.requestPermission();
+    notifPermissao = result === 'granted';
+    if(notifPermissao) showToast('🔔 Notificações ativadas!');
+  }
+}
+
+function enviarNotificacao(titulo, corpo, urgente){
+  if(!notifPermissao || Notification.permission !== 'granted') return;
+  try {
+    const n = new Notification(titulo, {
+      body: corpo,
+      icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🍷</text></svg>',
+      badge: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🚨</text></svg>',
+      tag: 'trebbiano-alerta',
+      renotify: true,
+      requireInteraction: urgente || false
+    });
+    n.onclick = () => { window.focus(); n.close(); };
+  } catch(e) { /* silencioso */ }
+}
+
+// ============================================================
+// BANNER DE EMERGÊNCIA
+// ============================================================
+function mostrarEmergencia(){
+  const vencidos = products.filter(p => getStatus(p) === 'vencido');
+  const hoje = products.filter(p => getDias(p.validade) === 0);
+  const criticos = [...vencidos, ...hoje.filter(p => getStatus(p) !== 'vencido')];
+
+  if(criticos.length === 0) return;
+
+  // Monta lista
+  const lista = document.getElementById('emergencyList');
+  const sub = document.getElementById('emergencySub');
+
+  sub.textContent = criticos.length + ' produto' + (criticos.length > 1 ? 's precisam' : ' precisa') + ' de ação imediata!';
+
+  lista.innerHTML = criticos.slice(0, 5).map(p => {
+    const d = getDias(p.validade);
+    const info = d < 0 ? 'VENCIDO há ' + Math.abs(d) + ' dia' + (Math.abs(d)>1?'s':'') : 'Vence HOJE';
+    return '<div class="emergency-item">' +
+      '<span style="font-size:26px">' + (EMOJIS[p.cat]||'📦') + '</span>' +
+      '<div><div class="emergency-item-name">' + p.nome + '</div>' +
+      '<div class="emergency-item-info">⚠️ ' + info + ' · Estoque: ' + p.qtd + ' ' + p.unidade + '</div></div>' +
+      '</div>';
+  }).join('');
+
+  document.getElementById('emergencyOverlay').classList.add('show');
+
+  // Vibra padrão de emergência: 3 pulsos longos
+  vibrar([400, 150, 400, 150, 400]);
+
+  // Notificação push
+  const nomes = criticos.slice(0,2).map(p=>p.nome).join(' e ');
+  enviarNotificacao(
+    '🚨 TREBBIANO — Ação Urgente!',
+    criticos.length + ' produto(s) vencido(s): ' + nomes,
+    true
+  );
+}
+
+function fecharEmergencia(){
+  document.getElementById('emergencyOverlay').classList.remove('show');
+  // Leva para aba de alertas
+  showView('alertas');
+}
+
+// ── Verificação automática de emergências ────────────────────
+function verificarEmergencias(silencioso){
+  const vencidos = products.filter(p => getStatus(p) === 'vencido');
+  const hoje = products.filter(p => getDias(p.validade) === 0);
+
+  if(vencidos.length > 0 || hoje.length > 0){
+    if(!silencioso) mostrarEmergencia();
+    // Vibra mais suave nas verificações automáticas
+    if(silencioso) vibrar([200, 100, 200]);
+    // Notificação silenciosa a cada hora
+    if(silencioso){
+      const nomes = [...vencidos,...hoje].slice(0,2).map(p=>p.nome).join(' e ');
+      enviarNotificacao('⚠️ Trebbiano — Verifique o estoque', nomes + ' precisa(m) de atenção', false);
+    }
+  }
+
+  // Vibração suave para estoque baixo
+  const baixos = products.filter(p => estoquesBaixo(p));
+  if(baixos.length > 0 && silencioso) vibrar([100, 80, 100]);
+}
+
+
+// ============================================================
+// INICIALIZAÇÃO
+// ============================================================
+
+// ============================================================
+// DIAGNÓSTICO DE CONEXÃO
+// ============================================================
+async function executarDiagnostico() {
+  const el = document.getElementById('diagContent');
+  el.innerHTML = '⏳ Testando conexão com a nuvem...<br>';
+
+  const url = SHEETS_URL + '?action=read';
+  el.innerHTML += `<br>📡 <strong>URL:</strong> <span style="font-size:10px;word-break:break-all;color:var(--muted)">${SHEETS_URL}</span><br>`;
+
+  // Teste 1: conexão básica com internet
+  try {
+    await fetch('https://www.google.com/favicon.ico', { mode: 'no-cors', cache: 'no-store' });
+    el.innerHTML += '<br>✅ <strong>Internet:</strong> Conectado';
+  } catch(e) {
+    el.innerHTML += '<br>❌ <strong>Internet:</strong> Sem conexão — conecte ao Wi-Fi ou dados móveis';
+    el.innerHTML += '<br><br>⚠️ <strong>Solução:</strong> Verifique sua conexão com a internet e tente novamente.';
+    return;
+  }
+
+  // Teste 2: acesso ao Google Apps Script
+  el.innerHTML += '<br>⏳ Testando acesso ao Google Script...';
+  try {
+    const resp = await fetch(url, { method: 'GET', cache: 'no-store' });
+    el.innerHTML += `<br>✅ <strong>Google Script:</strong> Respondeu (status ${resp.status})`;
+    const text = await resp.text();
+    el.innerHTML += `<br>✅ <strong>Resposta:</strong> <span style="font-size:11px;word-break:break-all;color:var(--muted)">${text.slice(0,120)}...</span>`;
+    try {
+      const json = JSON.parse(text);
+      if(json.error) {
+        el.innerHTML += `<br>⚠️ <strong>Erro no script:</strong> ${json.error}`;
+        el.innerHTML += '<br><br>💡 <strong>Solução:</strong> Reimplante o Apps Script como descrito nas instruções.';
+      } else {
+        el.innerHTML += `<br>✅ <strong>Dados:</strong> ${(json.products||[]).length} produtos encontrados`;
+        el.innerHTML += '<br><br>🎉 <strong>Tudo funcionando!</strong> Feche e tente adicionar um produto.';
+        products = json.products || [];
+        salvarCache();
+        atualizarContadores();
+        renderProducts();
+        setSyncUI('ok', 'Conectado!');
+      }
+    } catch(e) {
+      el.innerHTML += `<br>❌ <strong>Resposta inválida:</strong> Não é JSON válido. Reimplante o Apps Script.`;
+    }
+  } catch(e) {
+    el.innerHTML += `<br>❌ <strong>Google Script:</strong> Erro — ${e.message}`;
+    el.innerHTML += '<br><br>💡 <strong>Possíveis soluções:</strong><br>';
+    el.innerHTML += '1️⃣ Reimplante o Apps Script com "Nova versão"<br>';
+    el.innerHTML += '2️⃣ Confirme que "Quem tem acesso" = Qualquer pessoa<br>';
+    el.innerHTML += '3️⃣ Confirme que "Executar como" = Eu (seu e-mail)';
+  }
+}
+
+function abrirDiagnostico() {
+  document.getElementById('overlayDiag').classList.add('open');
+  executarDiagnostico();
+}
+
+function closeDiag(e) {
+  if(!e || e.target === document.getElementById('overlayDiag'))
+    document.getElementById('overlayDiag').classList.remove('open');
+}
+
+// Pede permissão de notificação
+pedirPermissaoNotificacao();
+
+// Carrega cache local enquanto busca nuvem
+const cache = carregarCache();
+if(cache.length > 0){
+  products = cache;
+  atualizarContadores();
+  renderProducts();
+  setSyncUI('syncing', 'Atualizando da nuvem...');
+} else {
+  setSyncUI('syncing', 'Carregando dados...');
+  renderProducts();
+}
+
+// Busca dados reais da nuvem
+carregarNuvem(false).then(() => {
+  iniciarAutoSync();
+  // Alertas de voz
+  if(vozConfig.ativo) {
+    iniciarTimer();
+    atualizarProximoAviso();
+    document.getElementById('voiceBtn').classList.remove('muted');
+    setTimeout(() => dispararAviso(), 1500);
+  } else {
+    document.getElementById('voiceBtn').classList.add('muted');
+    atualizarProximoAviso();
+    const jaAtivouUmaVez = localStorage.getItem('trebbiano_voz_seen');
+    if(!jaAtivouUmaVez) {
+      localStorage.setItem('trebbiano_voz_seen','1');
+      setTimeout(() => document.getElementById('overlayActivate').classList.add('open'), 1500);
+    }
+  }
+});
+</script>
+<!-- MODAL DIAGNÓSTICO -->
+<div class="overlay" id="overlayDiag" onclick="closeDiag(event)">
+  <div class="sheet" onclick="event.stopPropagation()" style="max-height:85vh;overflow-y:auto">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title">🔧 Diagnóstico de Conexão</div>
+    <div id="diagContent" style="font-size:13px;line-height:1.8;color:var(--text)">
+      Iniciando teste...
+    </div>
+    <button class="btn-primary" style="margin-top:16px" onclick="executarDiagnostico()">▶️ Testar Novamente</button>
+    <button class="btn-secondary" onclick="closeDiag()">Fechar</button>
+  </div>
+</div>
+</body>
+</html>
