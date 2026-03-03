@@ -571,7 +571,7 @@ body {
 // ============================================================
 // CONFIGURAÇÃO DA NUVEM (Google Sheets)
 // ============================================================
-const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxpxM1kKAoPHWMlCpi_9IY4rtQGBuVSKLR4Foj4QX5mbTQVid8tzo_MWtCHnwddfaMNBA/exec';
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwwZ-77PUEgG1o8GiHKLHh2doKwGvvjcXlOyEwf4tQCwLtn5UhhKpyddyPgfcFqpUpN1w/exec';
 
 // ============================================================
 // DADOS E ESTADO
@@ -690,32 +690,37 @@ async function salvar(){
   salvarCache();
   setSyncUI('syncing', 'Salvando...');
 
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 30000);
-
   try {
-    // USA POST para suportar listas grandes (200+ produtos)
-    const resp = await fetch(SHEETS_URL, {
+    // Envia via POST no-cors (contorna CORS do Apps Script)
+    const payload = JSON.stringify({ action: 'write', products: products });
+    await fetch(SHEETS_URL, {
       method: 'POST',
-      signal: controller.signal,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'write', products: products })
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain' },
+      body: payload
     });
-    clearTimeout(timeout);
-    if(!resp.ok) throw new Error('HTTP ' + resp.status);
-    const text = await resp.text();
-    const data = JSON.parse(text);
-    if(data.error) throw new Error(data.error);
-    if(!data.success) throw new Error('Resposta inesperada');
-    lastSync = new Date();
-    isSaving = false;
-    setSyncUI('ok', 'Salvo ' + lastSync.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}));
-    return true;
+
+    // Aguarda 5s para o Sheets processar
+    setSyncUI('syncing', 'Verificando...');
+    await new Promise(r => setTimeout(r, 5000));
+
+    // Confirma lendo de volta
+    const resp = await fetch(SHEETS_URL + '?action=read', { cache: 'no-store' });
+    const data = JSON.parse(await resp.text());
+    const countNuvem = (data.products || []).length;
+
+    if(countNuvem >= products.length) {
+      lastSync = new Date();
+      isSaving = false;
+      setSyncUI('ok', 'Salvo ' + lastSync.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}));
+      return true;
+    } else {
+      throw new Error('Planilha tem ' + countNuvem + ' de ' + products.length + ' produtos');
+    }
   } catch(err) {
-    clearTimeout(timeout);
     isSaving = false;
     setSyncUI('error', 'Erro ao salvar');
-    showToast('⚠️ Erro ao salvar na nuvem: ' + err.message);
+    showToast('⚠️ Erro: ' + err.message);
     return false;
   }
 }
