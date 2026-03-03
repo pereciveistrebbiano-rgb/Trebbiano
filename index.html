@@ -686,6 +686,7 @@ async function carregarNuvem(silencioso = false){
 
 // ── Salvar dados na nuvem ────────────────────────────────────
 async function salvar(){
+  isSaving = true;
   salvarCache(); // salva local imediatamente
   setSyncUI('syncing', 'Salvando...');
 
@@ -703,10 +704,12 @@ async function salvar(){
     if(data.error) throw new Error(data.error);
     lastSync = new Date();
     errosSeguidos = 0;
+    isSaving = false;
     setSyncUI('ok', 'Salvo ' + lastSync.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}));
     return true;
   } catch(err) {
     clearTimeout(timeout);
+    isSaving = false;
     setSyncUI('error', 'Salvo localmente');
     showToast('⚠️ Salvo no celular. Sincronizará quando houver conexão.');
     return false;
@@ -714,9 +717,14 @@ async function salvar(){
 }
 
 // ── Auto-sync a cada 60 segundos ─────────────────────────────
+let isSaving = false; // flag para não recarregar enquanto salva
+
 function iniciarAutoSync(){
   if(syncInterval) clearInterval(syncInterval);
-  syncInterval = setInterval(() => carregarNuvem(true), 90000);
+  // Auto-sync a cada 90s, mas só se não estiver salvando
+  syncInterval = setInterval(() => {
+    if(!isSaving) carregarNuvem(true);
+  }, 90000);
 }
 
 // ============================================================
@@ -1107,12 +1115,10 @@ async function saveProduct(){
   renderProducts();
   showToast('⏳ Salvando na nuvem...');
 
-  // Salva na nuvem e depois recarrega para confirmar
+  // Salva na nuvem — NÃO recarrega depois (evita sobrescrever dados locais)
   const ok = await salvar();
   if(ok){
-    showToast('✅ Produto ' + acao + ' e salvo na nuvem!');
-    // Recarrega da nuvem para garantir sincronia
-    await carregarNuvem(true);
+    showToast('✅ Produto ' + acao + '!');
   } else {
     showToast('⚠️ Salvo localmente. Verifique sua conexão.');
   }
@@ -1124,8 +1130,7 @@ async function excluir(id){
   showToast('⏳ Removendo...');
   const ok = await salvar();
   if(ok){
-    showToast('🗑️ Produto removido da nuvem!');
-    await carregarNuvem(true);
+    showToast('🗑️ Produto removido!');
   } else {
     showToast('⚠️ Removido localmente. Sincronize quando houver conexão.');
   }
@@ -1155,8 +1160,7 @@ async function saveStock(){
   showToast('⏳ Atualizando estoque...');
   const ok = await salvar();
   if(ok){
-    showToast(`📦 Estoque atualizado: ${tempStockQty} ${unidade}`);
-    await carregarNuvem(true);
+    showToast(`📦 Estoque: ${tempStockQty} ${unidade}`);
   } else {
     showToast('⚠️ Estoque salvo localmente. Sincronize quando houver conexão.');
   }
