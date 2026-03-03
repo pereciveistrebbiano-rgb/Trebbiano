@@ -1615,38 +1615,68 @@ function iniciarDeteccaoBuscaBarcode() {
 }
 
 function buscarPorCodigo(code) {
-  // Busca no sistema por código de barras ou SKU
-  const found = products.find(p =>
-    (p.barcode && p.barcode.trim() === code.trim()) ||
-    (p.sku && p.sku.trim().toLowerCase() === code.trim().toLowerCase())
-  );
+  const c = code.trim();
   const el = document.getElementById('scannerBuscaResultado');
+
+  let found = products.find(p => p.barcode && p.barcode.trim() === c);
+  if(!found) found = products.find(p => p.sku && p.sku.trim().toLowerCase() === c.toLowerCase());
+  if(!found) found = products.find(p => p.barcode && p.barcode.trim().length > 0 && (p.barcode.trim().includes(c) || c.includes(p.barcode.trim())));
+
   if(found) {
-    const st = getStatus(found);
-    const dias = getDias(found.validade);
-    const cores = { vencido:'var(--red)', alerta:'var(--orange)', atencao:'var(--yellow)', ok:'var(--green)' };
-    el.innerHTML = `<div class="scan-found">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
-        <span style="font-size:24px">${EMOJIS[found.cat]||'📦'}</span>
-        <div>
-          <div class="scan-result-name">✅ ${found.nome}</div>
-          <div class="scan-result-info">${found.cat} · ${found.qtd} ${found.unidade} · Val: ${fmtData(found.validade)}</div>
-        </div>
-      </div>
-      <button onclick="fecharScannerBusca();abrirDetalhe(${found.id})" style="width:100%;padding:12px;background:var(--burg);color:white;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;margin-top:4px">
-        👁️ Ver detalhes do produto
-      </button>
-    </div>`;
+    el.innerHTML = '<div class="scan-found">'
+      + '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">'
+      + '<span style="font-size:28px">' + (EMOJIS[found.cat]||'📦') + '</span>'
+      + '<div style="flex:1;min-width:0">'
+      + '<div class="scan-result-name">✅ ' + found.nome + '</div>'
+      + '<div class="scan-result-info">' + found.cat + ' · ' + found.qtd + ' ' + found.unidade + ' · Val: ' + fmtData(found.validade) + '</div>'
+      + '</div></div>'
+      + '<button onclick="fecharScannerBusca();abrirDetalhe(' + found.id + ')" style="width:100%;padding:12px;background:var(--burg);color:white;border:none;border-radius:10px;font-family:DM Sans,sans-serif;font-size:14px;font-weight:600;cursor:pointer">'
+      + '👁️ Ver detalhes</button></div>';
   } else {
-    el.innerHTML = `<div class="scan-not-found">
-      <div class="scan-result-name">❌ Produto não encontrado</div>
-      <div class="scan-result-info">Código: ${code}</div>
-      <button onclick="fecharScannerBusca();abrirAddComCodigo('${code}')" style="width:100%;padding:12px;background:var(--burg);color:white;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;margin-top:8px">
-        ➕ Cadastrar este produto
-      </button>
-    </div>`;
+    const semCodigo = products.filter(p => !p.barcode && !p.sku).length;
+    el.innerHTML = '<div class="scan-not-found">'
+      + '<div class="scan-result-name" style="margin-bottom:4px">❌ Código não cadastrado</div>'
+      + '<div class="scan-result-info">Lido: <b style="font-family:monospace;color:#1A0A0F">' + c + '</b></div>'
+      + (semCodigo > 0 ? '<div style="font-size:11px;color:#D4621A;margin:6px 0">⚠️ ' + semCodigo + ' produto(s) sem código de barras.</div>' : '')
+      + '<div style="display:flex;flex-direction:column;gap:8px;margin-top:10px">'
+      + '<button onclick="mostrarListaParaVincular(\'' + c + '\')" style="width:100%;padding:12px;background:#7A1422;color:white;border:none;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer">🔗 Vincular a produto existente</button>'
+      + '<button onclick="fecharScannerBusca();abrirAddComCodigo(\'' + c + '\')" style="width:100%;padding:11px;background:transparent;color:#7A1422;border:1.5px solid #7A1422;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer">➕ Cadastrar novo produto</button>'
+      + '</div></div>';
   }
 }
+
+function mostrarListaParaVincular(barcode) {
+  const el = document.getElementById('scannerBuscaResultado');
+  const semCodigo = products.filter(p => !p.barcode).sort((a,b) => a.nome.localeCompare(b.nome));
+  if(!semCodigo.length) { showToast('✅ Todos os produtos já têm código!'); return; }
+  let html = '<div style="margin-top:8px">'
+    + '<div style="font-size:12px;font-weight:600;color:#8A7A7F;margin-bottom:8px">Vincular código <b style="font-family:monospace;color:#1A0A0F">' + barcode + '</b> a qual produto?</div>'
+    + '<div style="max-height:240px;overflow-y:auto;display:flex;flex-direction:column;gap:6px">';
+  semCodigo.forEach(function(p) {
+    html += '<button onclick="vincularCodigo(' + p.id + ',\'' + barcode + '\')" '
+      + 'style="width:100%;padding:10px 12px;background:white;border:1.5px solid #F0E8D8;border-radius:10px;font-size:13px;color:#1A0A0F;cursor:pointer;text-align:left;display:flex;align-items:center;gap:8px">'
+      + '<span style="font-size:20px">' + (EMOJIS[p.cat]||'📦') + '</span>'
+      + '<div style="flex:1;min-width:0">'
+      + '<div style="font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + p.nome + '</div>'
+      + '<div style="font-size:11px;color:#8A7A7F">' + p.cat + ' · ' + p.qtd + ' ' + p.unidade + ' · Val: ' + fmtData(p.validade) + '</div>'
+      + '</div></button>';
+  });
+  html += '</div></div>';
+  el.innerHTML = html;
+}
+
+async function vincularCodigo(produtoId, barcode) {
+  const idx = products.findIndex(p => p.id === produtoId);
+  if(idx < 0) return;
+  products[idx].barcode = barcode;
+  addHistorico('🔗', products[idx].nome, 'Código vinculado: ' + barcode);
+  fecharScannerBusca();
+  atualizarContadores(); renderProducts();
+  showToast('⏳ Salvando...');
+  const ok = await salvar();
+  showToast(ok ? '✅ Código vinculado a "' + products[idx].nome + '"!' : '⚠️ Salvo localmente');
+}
+
 
 function buscarPorTexto(q) {
   if(!q) return null;
