@@ -687,31 +687,35 @@ async function carregarNuvem(silencioso = false){
 // ── Salvar dados na nuvem ────────────────────────────────────
 async function salvar(){
   isSaving = true;
-  salvarCache(); // salva local imediatamente
+  salvarCache();
   setSyncUI('syncing', 'Salvando...');
 
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 15000);
+  const timeout = setTimeout(() => controller.abort(), 30000);
 
   try {
-    const encoded = encodeURIComponent(JSON.stringify(products));
-    const url = SHEETS_URL + '?action=write&data=' + encoded;
-    const resp = await fetch(url, { method: 'GET', signal: controller.signal });
+    // USA POST para suportar listas grandes (200+ produtos)
+    const resp = await fetch(SHEETS_URL, {
+      method: 'POST',
+      signal: controller.signal,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'write', products: products })
+    });
     clearTimeout(timeout);
     if(!resp.ok) throw new Error('HTTP ' + resp.status);
     const text = await resp.text();
     const data = JSON.parse(text);
     if(data.error) throw new Error(data.error);
+    if(!data.success) throw new Error('Resposta inesperada');
     lastSync = new Date();
-    errosSeguidos = 0;
     isSaving = false;
     setSyncUI('ok', 'Salvo ' + lastSync.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}));
     return true;
   } catch(err) {
     clearTimeout(timeout);
     isSaving = false;
-    setSyncUI('error', 'Salvo localmente');
-    showToast('⚠️ Salvo no celular. Sincronizará quando houver conexão.');
+    setSyncUI('error', 'Erro ao salvar');
+    showToast('⚠️ Erro ao salvar na nuvem: ' + err.message);
     return false;
   }
 }
