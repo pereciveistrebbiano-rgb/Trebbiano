@@ -352,6 +352,29 @@ html,body { height:100%; background:var(--bg); font-family:'DM Sans',sans-serif;
 .export-bar { display:flex; gap:8px; padding:0 16px 12px; }
 .export-btn { flex:1; padding:10px; background:var(--white); border:1.5px solid var(--cream2); border-radius:12px; font-family:'DM Sans',sans-serif; font-size:13px; font-weight:500; color:var(--text); cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px; }
 .export-btn:active { background:var(--cream); }
+
+/* Search modes */
+.smode-btn { padding:5px 12px; border-radius:20px; border:1.5px solid var(--cream2); background:var(--white); font-size:11px; font-weight:500; color:var(--muted); cursor:pointer; transition:all 0.15s; white-space:nowrap; font-family:'DM Sans',sans-serif; }
+.smode-active { background:var(--burg) !important; border-color:var(--burg) !important; color:white !important; }
+
+/* Product detail sheet */
+.detail-photo { width:100%; height:200px; object-fit:cover; background:var(--cream); display:flex; align-items:center; justify-content:center; font-size:64px; }
+.detail-photo img { width:100%; height:100%; object-fit:cover; }
+.detail-section { padding:16px 20px; border-bottom:1px solid var(--cream); }
+.detail-section:last-child { border-bottom:none; }
+.detail-label { font-size:10px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.8px; margin-bottom:4px; }
+.detail-value { font-size:15px; font-weight:500; color:var(--text); }
+.detail-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.detail-status-bar { padding:12px 20px; display:flex; align-items:center; gap:10px; }
+.detail-actions { display:flex; gap:8px; padding:16px 20px; }
+.detail-actions .btn-primary { flex:1; }
+.detail-actions .btn-danger { flex-shrink:0; width:48px; background:var(--red-bg); color:var(--red); border:none; border-radius:14px; font-size:20px; cursor:pointer; }
+
+/* Scan search result */
+.scan-found { background:var(--green-bg); border:2px solid var(--green); border-radius:12px; padding:14px 16px; margin:12px 0; }
+.scan-not-found { background:var(--red-bg); border:2px solid rgba(192,57,43,0.3); border-radius:12px; padding:14px 16px; margin:12px 0; }
+.scan-result-name { font-size:15px; font-weight:600; color:var(--text); }
+.scan-result-info { font-size:12px; color:var(--muted); margin-top:3px; }
 </style>
 </head>
 <body>
@@ -431,10 +454,19 @@ html,body { height:100%; background:var(--bg); font-family:'DM Sans',sans-serif;
   <!-- VIEW: PRODUTOS -->
   <div class="view active" id="viewProdutos">
     <div class="search-wrap">
-      <div class="search-box">
-        <span class="search-icon">🔍</span>
-        <input class="search-input" id="searchInput" placeholder="Buscar nome, SKU ou código de barras..." oninput="renderProducts()">
-        <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
+      <div class="search-box" style="display:flex;gap:8px;align-items:center">
+        <div style="position:relative;flex:1">
+          <span class="search-icon">🔍</span>
+          <input class="search-input" id="searchInput" placeholder="Buscar nome, SKU ou código de barras..." oninput="pesquisarProduto()">
+          <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
+        </div>
+        <button onclick="abrirScannerBusca()" style="flex-shrink:0;width:46px;height:46px;background:linear-gradient(135deg,var(--burg),var(--burg2));border:none;border-radius:12px;color:white;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;" title="Escanear código de barras">📷</button>
+      </div>
+      <div id="searchModeBar" style="display:flex;gap:6px;margin-top:8px">
+        <button onclick="setSearchMode('all')" id="smode-all" class="smode-btn smode-active">Todos</button>
+        <button onclick="setSearchMode('barcode')" id="smode-barcode" class="smode-btn">🔢 Cód. barras</button>
+        <button onclick="setSearchMode('sku')" id="smode-sku" class="smode-btn">🏷️ SKU</button>
+        <button onclick="setSearchMode('nome')" id="smode-nome" class="smode-btn">📝 Nome</button>
       </div>
     </div>
     <div class="filter-scroll" id="filterScroll">
@@ -623,6 +655,37 @@ html,body { height:100%; background:var(--bg); font-family:'DM Sans',sans-serif;
       <button class="btn-primary" onclick="saveStock()">✓ Confirmar</button>
       <button class="btn-secondary" onclick="closeSheet(null,'overlayStock')">Cancelar</button>
     </div>
+  </div>
+</div>
+
+<!-- ══ MODAL: SCANNER BUSCA ══ -->
+<div class="overlay" id="overlayScannerBusca">
+  <div class="scanner-modal" onclick="event.stopPropagation()">
+    <div class="scanner-header">
+      <span class="scanner-title">🔍 Buscar produto</span>
+      <button class="scanner-close" onclick="fecharScannerBusca()">✕</button>
+    </div>
+    <div style="position:relative;flex:1;width:100%;display:flex;align-items:center;justify-content:center;background:#000">
+      <video id="scannerBuscaVideo" autoplay playsinline muted style="width:100%;height:100%;object-fit:cover"></video>
+      <div class="scanner-overlay">
+        <div class="scanner-frame">
+          <div class="scanner-line"></div>
+        </div>
+      </div>
+    </div>
+    <div class="scanner-result" style="min-height:120px">
+      <div class="scanner-result-label">Aponte para o código de barras do produto</div>
+      <div class="scanner-result-code" id="scannerBuscaCode">Aguardando...</div>
+      <div id="scannerBuscaResultado"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MODAL: DETALHE PRODUTO ══ -->
+<div class="overlay" id="overlayDetalhe" onclick="closeSheet(event,'overlayDetalhe')">
+  <div class="sheet" onclick="event.stopPropagation()" style="max-height:96vh">
+    <div class="sheet-handle"></div>
+    <div id="detalheContent"></div>
   </div>
 </div>
 
@@ -880,13 +943,31 @@ function clearSearch() {
   renderProducts();
 }
 
+let searchMode = 'all';
+function setSearchMode(mode) {
+  searchMode = mode;
+  document.querySelectorAll('.smode-btn').forEach(b => b.classList.remove('smode-active'));
+  document.getElementById('smode-'+mode).classList.add('smode-active');
+  // Update placeholder
+  const placeholders = { all:'Buscar nome, SKU ou código de barras...', barcode:'Digite ou escaneie o código de barras...', sku:'Digite o código SKU...', nome:'Digite o nome do produto...' };
+  document.getElementById('searchInput').placeholder = placeholders[mode];
+  pesquisarProduto();
+}
+function pesquisarProduto() {
+  renderProducts();
+}
 function renderProducts() {
   const q=document.getElementById('searchInput').value.trim().toLowerCase();
   document.getElementById('searchClear').style.display=q?'block':'none';
   let list=[...products];
   if(activeFilter!=='Todos') list=list.filter(p=>p.cat===activeFilter);
   if(activeStatusFilter) list=list.filter(p=>getStatus(p)===activeStatusFilter);
-  if(q) list=list.filter(p=>(p.nome+p.sku+p.barcode+p.fornecedor).toLowerCase().includes(q));
+  if(q) {
+    if(searchMode==='barcode') list=list.filter(p=>(p.barcode||'').toLowerCase().includes(q));
+    else if(searchMode==='sku') list=list.filter(p=>(p.sku||'').toLowerCase().includes(q));
+    else if(searchMode==='nome') list=list.filter(p=>p.nome.toLowerCase().includes(q));
+    else list=list.filter(p=>(p.nome+' '+(p.sku||'')+' '+(p.barcode||'')+' '+(p.fornecedor||'')).toLowerCase().includes(q));
+  }
   list.sort((a,b)=>getDias(a.validade)-getDias(b.validade));
   const grid=document.getElementById('productsGrid');
   if(!list.length){ grid.innerHTML=`<div class="empty-state"><div class="empty-icon">${q?'🔍':'📦'}</div><div class="empty-title">${q?'Nenhum resultado':'Nenhum produto'}</div><div class="empty-sub">${q?'Tente outro termo':'Toque no + para adicionar'}</div></div>`; return; }
@@ -902,7 +983,7 @@ function renderProducts() {
       <div class="card-inner">
         <div class="card-photo" onclick="abrirFotoModal(${p.id})">${fotoHtml}<div class="card-photo-overlay"><span>📷</span></div></div>
         <div class="card-content">
-          <div class="card-top">
+          <div class="card-top" onclick="abrirDetalhe(${p.id})" style="cursor:pointer">
             <div class="card-name">${p.nome}</div>
             <span class="${badgeCls}">${badgeText}</span>
           </div>
@@ -1479,6 +1560,164 @@ function showToast(msg) {
   t.textContent=msg; t.classList.add('show');
   clearTimeout(toastTimer);
   toastTimer=setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+// ══════════════════════════════════════════════
+// BUSCA POR SCANNER
+// ══════════════════════════════════════════════
+let scannerBuscaStream = null;
+
+async function abrirScannerBusca() {
+  document.getElementById('scannerBuscaCode').textContent = 'Aguardando...';
+  document.getElementById('scannerBuscaResultado').innerHTML = '';
+  document.getElementById('overlayScannerBusca').classList.add('open');
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ video:{ facingMode:'environment' } });
+    scannerBuscaStream = stream;
+    document.getElementById('scannerBuscaVideo').srcObject = stream;
+    iniciarDeteccaoBuscaBarcode();
+  } catch(e) {
+    document.getElementById('scannerBuscaCode').textContent = '⚠️ Câmera não disponível';
+  }
+}
+
+function fecharScannerBusca() {
+  if(scannerBuscaStream){ scannerBuscaStream.getTracks().forEach(t=>t.stop()); scannerBuscaStream=null; }
+  document.getElementById('overlayScannerBusca').classList.remove('open');
+}
+
+function iniciarDeteccaoBuscaBarcode() {
+  if(!('BarcodeDetector' in window)){
+    document.getElementById('scannerBuscaCode').textContent = '⚠️ Scanner não suportado. Use a busca manual.';
+    return;
+  }
+  const detector = new BarcodeDetector({ formats:['ean_13','ean_8','code_128','code_39','qr_code','upc_a','upc_e'] });
+  const video = document.getElementById('scannerBuscaVideo');
+  let detectando = true;
+  const scan = async () => {
+    if(!scannerBuscaStream || !detectando) return;
+    if(video.readyState === video.HAVE_ENOUGH_DATA) {
+      try {
+        const barcodes = await detector.detect(video);
+        if(barcodes.length > 0) {
+          detectando = false;
+          const code = barcodes[0].rawValue;
+          document.getElementById('scannerBuscaCode').textContent = code;
+          if(navigator.vibrate) navigator.vibrate([100,50,100]);
+          buscarPorCodigo(code);
+          return;
+        }
+      } catch(e){}
+    }
+    if(scannerBuscaStream) requestAnimationFrame(scan);
+  };
+  requestAnimationFrame(scan);
+}
+
+function buscarPorCodigo(code) {
+  // Busca no sistema por código de barras ou SKU
+  const found = products.find(p =>
+    (p.barcode && p.barcode.trim() === code.trim()) ||
+    (p.sku && p.sku.trim().toLowerCase() === code.trim().toLowerCase())
+  );
+  const el = document.getElementById('scannerBuscaResultado');
+  if(found) {
+    const st = getStatus(found);
+    const dias = getDias(found.validade);
+    const cores = { vencido:'var(--red)', alerta:'var(--orange)', atencao:'var(--yellow)', ok:'var(--green)' };
+    el.innerHTML = `<div class="scan-found">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+        <span style="font-size:24px">${EMOJIS[found.cat]||'📦'}</span>
+        <div>
+          <div class="scan-result-name">✅ ${found.nome}</div>
+          <div class="scan-result-info">${found.cat} · ${found.qtd} ${found.unidade} · Val: ${fmtData(found.validade)}</div>
+        </div>
+      </div>
+      <button onclick="fecharScannerBusca();abrirDetalhe(${found.id})" style="width:100%;padding:12px;background:var(--burg);color:white;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;margin-top:4px">
+        👁️ Ver detalhes do produto
+      </button>
+    </div>`;
+  } else {
+    el.innerHTML = `<div class="scan-not-found">
+      <div class="scan-result-name">❌ Produto não encontrado</div>
+      <div class="scan-result-info">Código: ${code}</div>
+      <button onclick="fecharScannerBusca();abrirAddComCodigo('${code}')" style="width:100%;padding:12px;background:var(--burg);color:white;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;margin-top:8px">
+        ➕ Cadastrar este produto
+      </button>
+    </div>`;
+  }
+}
+
+function buscarPorTexto(q) {
+  if(!q) return null;
+  q = q.trim().toLowerCase();
+  return products.find(p =>
+    (p.barcode && p.barcode.toLowerCase().includes(q)) ||
+    (p.sku && p.sku.toLowerCase().includes(q)) ||
+    p.nome.toLowerCase().includes(q)
+  );
+}
+
+function abrirAddComCodigo(barcode) {
+  // Abre formulário de cadastro já com o código preenchido
+  abrirAdd();
+  document.getElementById('fBarcode').value = barcode;
+  showToast('📦 Código preenchido! Complete os demais campos.');
+}
+
+// ══════════════════════════════════════════════
+// DETALHE DO PRODUTO
+// ══════════════════════════════════════════════
+function abrirDetalhe(id) {
+  const p = products.find(x => x.id === id);
+  if(!p) return;
+  const st = getStatus(p);
+  const dias = getDias(p.validade);
+  const cores = { vencido:'var(--red)', alerta:'var(--orange)', atencao:'var(--yellow)', ok:'var(--green)' };
+  const badges = { vencido:'VENCIDO', alerta:'ALERTA', atencao:'ATENÇÃO', ok:'OK' };
+  const bgCores = { vencido:'var(--red-bg)', alerta:'var(--orange-bg)', atencao:'var(--yellow-bg)', ok:'var(--green-bg)' };
+  const diasTexto = dias < 0 ? `Vencido há ${Math.abs(dias)} dias` : dias === 0 ? 'Vence HOJE' : `Vence em ${dias} dias`;
+  const margem = p.precoCusto > 0 ? (((p.precoVenda - p.precoCusto) / p.precoCusto) * 100).toFixed(1) + '%' : '—';
+
+  document.getElementById('detalheContent').innerHTML = `
+    <div class="detail-photo" style="background:var(--cream)">
+      ${p.foto ? `<img src="${p.foto}" alt="${p.nome}">` : `<span style="font-size:72px">${EMOJIS[p.cat]||'📦'}</span>`}
+    </div>
+    <div class="detail-status-bar" style="background:${bgCores[st]}">
+      <span style="font-size:20px">${st==='vencido'?'🔴':st==='alerta'?'🟠':st==='atencao'?'🟡':'🟢'}</span>
+      <div>
+        <div style="font-weight:700;color:${cores[st]};font-size:14px">${badges[st]}</div>
+        <div style="font-size:12px;color:${cores[st]};opacity:0.8">${diasTexto}</div>
+      </div>
+      <div style="margin-left:auto;font-size:22px;font-weight:700;font-family:'Cormorant Garamond',serif;color:${cores[st]}">${fmtData(p.validade)}</div>
+    </div>
+    <div class="detail-section">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--text);margin-bottom:4px">${p.nome}</div>
+      <div style="font-size:13px;color:var(--muted)">${EMOJIS[p.cat]||'📦'} ${p.cat}${p.fornecedor?' · '+p.fornecedor:''}</div>
+    </div>
+    <div class="detail-section">
+      <div class="detail-grid">
+        <div><div class="detail-label">Estoque atual</div><div class="detail-value" style="color:${p.qtd>=p.min?'var(--green)':'var(--red)'};font-size:22px;font-weight:700;font-family:'Cormorant Garamond',serif">${p.qtd} <span style="font-size:14px;font-weight:400">${p.unidade}</span></div></div>
+        <div><div class="detail-label">Estoque mínimo</div><div class="detail-value" style="font-size:22px;font-weight:700;font-family:'Cormorant Garamond',serif">${p.min} <span style="font-size:14px;font-weight:400">${p.unidade}</span></div></div>
+        ${p.precoCusto?`<div><div class="detail-label">Preço de custo</div><div class="detail-value">${fmtCurrency(p.precoCusto)}</div></div>`:''}
+        ${p.precoVenda?`<div><div class="detail-label">Preço de venda</div><div class="detail-value" style="color:var(--green)">${fmtCurrency(p.precoVenda)}</div></div>`:''}
+        ${p.precoVenda&&p.precoCusto?`<div><div class="detail-label">Margem</div><div class="detail-value" style="color:var(--gold)">${margem}</div></div>`:''}
+        ${p.precoVenda?`<div><div class="detail-label">Valor em estoque</div><div class="detail-value">${fmtCurrency(p.precoVenda*p.qtd)}</div></div>`:''}
+      </div>
+    </div>
+    ${(p.sku||p.barcode)?`<div class="detail-section">
+      <div class="detail-grid">
+        ${p.sku?`<div><div class="detail-label">Código SKU</div><div class="detail-value" style="font-family:monospace;font-size:16px">${p.sku}</div></div>`:''}
+        ${p.barcode?`<div><div class="detail-label">Código de barras</div><div class="detail-value" style="font-family:monospace;font-size:14px">${p.barcode}</div></div>`:''}
+      </div>
+    </div>`:''}
+    <div class="detail-actions">
+      <button class="btn-primary" onclick="closeSheet(null,'overlayDetalhe');abrirStock(${p.id})">📦 Atualizar Estoque</button>
+      <button class="btn-primary" style="background:transparent;border:1.5px solid var(--burg);color:var(--burg)" onclick="closeSheet(null,'overlayDetalhe');abrirEdit(${p.id})">✏️ Editar</button>
+      <button class="detail-actions btn-danger" onclick="closeSheet(null,'overlayDetalhe');excluir(${p.id})">🗑️</button>
+    </div>
+  `;
+  document.getElementById('overlayDetalhe').classList.add('open');
 }
 
 // ══════════════════════════════════════════════
