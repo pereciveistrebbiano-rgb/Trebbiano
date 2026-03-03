@@ -270,7 +270,7 @@ html,body { height:100%; background:var(--bg); font-family:'DM Sans',sans-serif;
 .history-time { font-size:10px; color:var(--muted); flex-shrink:0; }
 
 /* ── SCANNER ── */
-.scanner-modal { background:#000; border-radius:20px 20px 0 0; width:100%; height:85vh; display:flex; flex-direction:column; align-items:center; overflow:hidden; }
+.scanner-modal { background:#000; border-radius:20px 20px 0 0; width:100%; height:92vh; display:flex; flex-direction:column; align-items:center; overflow:hidden; }
 .scanner-header { display:flex; justify-content:space-between; align-items:center; width:100%; padding:16px 20px; color:white; }
 .scanner-title { font-size:18px; font-weight:600; }
 .scanner-close { font-size:24px; cursor:pointer; background:rgba(255,255,255,0.1); border:none; color:white; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; }
@@ -279,7 +279,7 @@ html,body { height:100%; background:var(--bg); font-family:'DM Sans',sans-serif;
 .scanner-frame { width:240px; height:140px; border:2px solid var(--gold); border-radius:12px; box-shadow:0 0 0 9999px rgba(0,0,0,0.5); position:relative; }
 .scanner-line { position:absolute; top:50%; left:0; right:0; height:2px; background:var(--gold); animation:scanLine 2s linear infinite; }
 @keyframes scanLine { 0% { top:10%; } 100% { top:90%; } }
-.scanner-result { padding:16px 20px; background:#111; width:100%; color:white; }
+.scanner-result { padding:16px 20px; background:#111; width:100%; color:white; overflow-y:auto; }
 .scanner-result-code { font-family:monospace; font-size:16px; color:var(--gold2); }
 .scanner-result-label { font-size:11px; color:rgba(255,255,255,0.5); margin-bottom:4px; }
 .scanner-use-btn { width:100%; padding:14px; background:var(--gold); border:none; border-radius:12px; font-family:'DM Sans',sans-serif; font-size:15px; font-weight:600; color:var(--text); cursor:pointer; margin-top:12px; }
@@ -665,7 +665,7 @@ html,body { height:100%; background:var(--bg); font-family:'DM Sans',sans-serif;
       <span class="scanner-title">🔍 Buscar produto</span>
       <button class="scanner-close" onclick="fecharScannerBusca()">✕</button>
     </div>
-    <div style="position:relative;flex:1;width:100%;display:flex;align-items:center;justify-content:center;background:#000">
+    <div style="position:relative;height:50vh;width:100%;flex-shrink:0;overflow:hidden">
       <video id="scannerBuscaVideo" autoplay playsinline muted style="width:100%;height:100%;object-fit:cover"></video>
       <div class="scanner-overlay">
         <div class="scanner-frame">
@@ -673,9 +673,9 @@ html,body { height:100%; background:var(--bg); font-family:'DM Sans',sans-serif;
         </div>
       </div>
     </div>
-    <div class="scanner-result" style="min-height:120px">
-      <div class="scanner-result-label">Aponte para o código de barras do produto</div>
-      <div class="scanner-result-code" id="scannerBuscaCode">Aguardando...</div>
+    <div class="scanner-result" style="flex:1;overflow-y:auto;min-height:0;padding:14px 16px">
+      <div class="scanner-result-label" style="margin-bottom:6px">Aponte para o código de barras do produto</div>
+      <div class="scanner-result-code" id="scannerBuscaCode" style="margin-bottom:10px">Aguardando...</div>
       <div id="scannerBuscaResultado"></div>
     </div>
   </div>
