@@ -463,6 +463,7 @@ body {
     <button class="filter-btn" data-cat="Chocolate" onclick="setFilter(this,'Chocolate')">🍫 Chocolate</button>
     <button class="filter-btn" data-cat="Embutido" onclick="setFilter(this,'Embutido')">🥩 Embutido</button>
     <button class="filter-btn" data-cat="Conserva" onclick="setFilter(this,'Conserva')">🫙 Conserva</button>
+    <button class="filter-btn" data-cat="Outros" onclick="setFilter(this,'Outros')">📦 Outros</button>
   </div>
   <div id="productList"></div>
 </div>
@@ -508,6 +509,7 @@ body {
         <option value="Chocolate">🍫 Chocolate & Doce Fino</option>
         <option value="Embutido">🥩 Embutido</option>
         <option value="Conserva">🫙 Conserva</option>
+        <option value="Outros">📦 Outros</option>
       </select>
     </div>
     <div class="form-row">
@@ -569,7 +571,7 @@ body {
 // ============================================================
 // CONFIGURAÇÃO DA NUVEM (Google Sheets)
 // ============================================================
-const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxwrx2SseCXfoK25-awhtjvc86coH3U4b8UDb0fAP8Bb7CwFx8taHVlQdKd9RVDiAe1Cw/exec';
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxpxM1kKAoPHWMlCpi_9IY4rtQGBuVSKLR4Foj4QX5mbTQVid8tzo_MWtCHnwddfaMNBA/exec';
 
 // ============================================================
 // DADOS E ESTADO
@@ -585,7 +587,7 @@ let stockEditId = null;
 let tempStockQty = 0;
 let syncInterval = null;
 
-const EMOJIS = { Vinho:'🍷', Queijo:'🧀', Chocolate:'🍫', Embutido:'🥩', Conserva:'🫙' };
+const EMOJIS = { Vinho:'🍷', Queijo:'🧀', Chocolate:'🍫', Embutido:'🥩', Conserva:'🫙', Outros:'📦' };
 
 // ── Cache local (fallback offline) ──────────────────────────
 function salvarCache(){ localStorage.setItem('trebbiano_cache', JSON.stringify(products)); }
@@ -625,10 +627,23 @@ async function carregarNuvem(silencioso = false){
     const data = JSON.parse(text);
     if(data.error) throw new Error(data.error);
 
-    products = (data.products || []).map(p => ({
-      ...p,
-      validade: normalizarData(p.validade) || p.validade
-    }));
+    // Limpa e normaliza todos os dados vindos da nuvem
+    products = (data.products || []).map(p => {
+      const clean = {};
+      // Remove campos com chave vazia (bug da planilha)
+      Object.keys(p).forEach(k => { if(k.trim() !== '') clean[k] = p[k]; });
+      // Normaliza data
+      clean.validade = normalizarData(clean.validade) || '';
+      // Garante campos obrigatórios com valores padrão
+      clean.id = parseInt(clean.id) || 0;
+      clean.qtd = parseInt(clean.qtd) || 0;
+      clean.min = parseInt(clean.min) || 0;
+      clean.unidade = clean.unidade || 'un';
+      clean.cat = (clean.cat && clean.cat.trim()) ? clean.cat : 'Outros';
+      clean.nome = clean.nome || '';
+      clean.fornecedor = clean.fornecedor || '';
+      return clean;
+    }).filter(p => p.nome.trim()); // remove linhas sem nome
     salvarCache();
     lastSync = new Date();
     setSyncUI('ok', 'Atualizado ' + lastSync.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}));
