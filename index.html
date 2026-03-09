@@ -861,7 +861,10 @@ async function carregarNuvem(silencioso=false) {
     const resp = await fetch(SHEETS_URL+'?action=read', { cache:'no-store' });
     const data = JSON.parse(await resp.text());
     if(data.error) throw new Error(data.error);
-    products = limparProdutos(data.products);
+
+    // Mescla fotos do localStorage (fotos nunca vêm do Sheets)
+    products = mesclarFotos(limparProdutos(data.products));
+
     salvarCache();
     setSyncUI('ok','Atualizado '+new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}));
     atualizarContadores(); renderProducts(); renderAlertas(); renderDash();
@@ -869,8 +872,8 @@ async function carregarNuvem(silencioso=false) {
     if(!silencioso) showToast('☁️ Sincronizado!');
     return true;
   } catch(e) {
-    const c=carregarCache();
-    if(c.length>0&&products.length===0){ products=c; atualizarContadores(); renderProducts(); }
+    const c = carregarCache();
+    if(c.length>0&&products.length===0){ products=mesclarFotos(c); atualizarContadores(); renderProducts(); }
     setSyncUI('error','Sem conexão — cache local');
     if(!silencioso) showToast('📴 Usando dados locais');
     return false;
@@ -976,7 +979,7 @@ function renderProducts() {
     const badgeText=dias<0?`Vencido há ${Math.abs(dias)}d`:dias===0?'Vence hoje':dias<=7?`${dias}d`:dias<=30?`${dias}d`:`${dias}d`;
     const badgeCls='card-badge badge-'+st;
     const estoqueOk=p.qtd>=p.min;
-    const fotoHtml=p.foto?`<img src="${encodeURI(p.foto)}" alt="" style="width:100%;height:100%;object-fit:cover">`:(EMOJIS[p.cat]||'📦');
+    const fotoHtml=p.foto?`<img src="${p.foto}" alt="" style="width:100%;height:100%;object-fit:cover">`:(EMOJIS[p.cat]||'📦');
     const skuHtml=p.sku?`<span class="card-sku">${p.sku}</span>`:'';
     const precoHtml=p.precoVenda?`<span class="card-price">${fmtCurrency(p.precoVenda)}</span>`:'';
     return `<div class="product-card st-${st}" style="animation-delay:${list.indexOf(p)*0.04}s">
@@ -1250,6 +1253,20 @@ function handlePhoto(e) {
   reader.readAsDataURL(file);
 }
 
+// ── Fotos: separadas no localStorage, nunca vão pro Sheets ──────────
+function salvarFotos() {
+  const fotos = {};
+  products.forEach(p => { if(p.foto) fotos[p.id] = p.foto; });
+  try { localStorage.setItem('trebbiano_fotos', JSON.stringify(fotos)); } catch(e) {}
+}
+function carregarFotos() {
+  try { return JSON.parse(localStorage.getItem('trebbiano_fotos')||'{}'); } catch(e) { return {}; }
+}
+function mesclarFotos(lista) {
+  const fotos = carregarFotos();
+  return lista.map(p => ({ ...p, foto: fotos[p.id] || p.foto || '' }));
+}
+
 async function saveProduct() {
   const nome=document.getElementById('fNome').value.trim();
   const cat=document.getElementById('fCat').value;
@@ -1268,16 +1285,28 @@ async function saveProduct() {
   if(!validade){ showToast('⚠️ Informe a data de validade!'); return; }
 
   const acao=editingId?'atualizado':'cadastrado';
+  // foto NÃO vai no prodData para o Sheets — fica só no localStorage
   const prodData={nome,cat,validade,qtd,min,unidade,fornecedor,sku,barcode,precoCusto,precoVenda,foto:currentPhoto||''};
 
+  let prodId;
   if(editingId){
     const idx=products.findIndex(x=>x.id===editingId);
     products[idx]={...products[idx],...prodData};
+    prodId=editingId;
     addHistorico('✏️',nome,`Editado — ${qtd} ${unidade} · Val: ${fmtData(validade)}`);
   } else {
-    const newId=Math.max(0,...products.map(x=>x.id))+1;
-    products.push({id:newId,...prodData});
+    prodId=Math.max(0,...products.map(x=>x.id))+1;
+    products.push({id:prodId,...prodData});
     addHistorico('➕',nome,`Cadastrado — ${qtd} ${unidade} · Val: ${fmtData(validade)}`);
+  }
+
+  // Salva foto SEPARADA no localStorage (permanente, nunca some)
+  if(currentPhoto) {
+    const fotos = carregarFotos();
+    fotos[prodId] = currentPhoto;
+    try { localStorage.setItem('trebbiano_fotos', JSON.stringify(fotos)); } catch(e) {
+      showToast('⚠️ Foto grande demais para salvar — tente uma menor');
+    }
   }
 
   closeSheet(null,'overlayAdd');
@@ -1846,7 +1875,7 @@ function notificarAgora(titulo, corpo, urgente) {
 // ══════════════════════════════════════════════
 // Load cache while fetching cloud
 const cache=carregarCache();
-if(cache.length){ products=cache; atualizarContadores(); renderProducts(); renderAlertas(); renderDash(); setSyncUI('syncing','Atualizando...'); }
+if(cache.length){ products=mesclarFotos(cache); atualizarContadores(); renderProducts(); renderAlertas(); renderDash(); setSyncUI('syncing','Atualizando...'); }
 else { setSyncUI('syncing','Carregando...'); }
 
 carregarNuvem(false).then(async ()=>{
