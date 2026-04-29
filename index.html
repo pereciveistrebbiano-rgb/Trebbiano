@@ -73,6 +73,8 @@ html,body{height:100%;background:var(--bg);font-family:'DM Sans',sans-serif;colo
 .product-card.st-vencido{border-left-color:var(--red);animation:slideUp 0.3s ease both,pulseBorder 1.4s ease-in-out infinite;}
 .product-card.st-alerta{border-left-color:var(--orange);}
 .product-card.st-atencao{border-left-color:var(--yellow);}
+.product-card.st-aviso{border-left-color:#5B8ED6;}
+.product-card.st-observar{border-left-color:#7CB98A;}
 .product-card.st-ok{border-left-color:var(--green);}
 @keyframes slideUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
 @keyframes pulseBorder{0%,100%{box-shadow:var(--shadow);}50%{box-shadow:0 0 0 3px rgba(192,57,43,0.15),var(--shadow);}}
@@ -86,7 +88,12 @@ html,body{height:100%;background:var(--bg);font-family:'DM Sans',sans-serif;colo
 .card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:4px;}
 .card-name{font-size:14px;font-weight:600;color:var(--text);line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px;}
 .card-badge{flex-shrink:0;font-size:10px;font-weight:600;padding:2px 7px;border-radius:20px;white-space:nowrap;}
-.badge-vencido{background:var(--red-bg);color:var(--red);} .badge-alerta{background:var(--orange-bg);color:var(--orange);} .badge-atencao{background:var(--yellow-bg);color:var(--yellow);} .badge-ok{background:var(--green-bg);color:var(--green);}
+.badge-vencido{background:var(--red-bg);color:var(--red);}
+.badge-alerta{background:var(--orange-bg);color:var(--orange);}
+.badge-atencao{background:var(--yellow-bg);color:var(--yellow);}
+.badge-aviso{background:#EEF4FD;color:#1565C0;}
+.badge-observar{background:#EDF7F0;color:#2E7A42;}
+.badge-ok{background:var(--green-bg);color:var(--green);}
 .card-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px;}
 .card-cat{font-size:11px;color:var(--muted);}
 .card-sku{font-size:10px;color:var(--muted);background:var(--cream);padding:1px 6px;border-radius:6px;font-family:monospace;}
@@ -330,18 +337,22 @@ html,body{height:100%;background:var(--bg);font-family:'DM Sans',sans-serif;colo
       <div class="header-btn" onclick="abrirWA()" title="WhatsApp">📱</div>
     </div>
   </div>
-  <div class="header-counters">
+  <div class="header-counters" style="grid-template-columns:repeat(5,1fr)">
     <div class="counter-chip" onclick="filtrarStatus('vencido')">
       <div class="counter-num red" id="cntVencido">0</div>
-      <div class="counter-label">Vencidos</div>
+      <div class="counter-label">Vencido</div>
     </div>
     <div class="counter-chip" onclick="filtrarStatus('alerta')">
       <div class="counter-num orange" id="cntAlerta">0</div>
-      <div class="counter-label">7 dias</div>
+      <div class="counter-label">15d</div>
     </div>
     <div class="counter-chip" onclick="filtrarStatus('atencao')">
       <div class="counter-num yellow" id="cntAtencao">0</div>
-      <div class="counter-label">30 dias</div>
+      <div class="counter-label">30d</div>
+    </div>
+    <div class="counter-chip" onclick="filtrarStatus('aviso')">
+      <div class="counter-num" style="color:#8BC4FF" id="cntAviso">0</div>
+      <div class="counter-label">45d</div>
     </div>
     <div class="counter-chip" onclick="filtrarStatus(null)">
       <div class="counter-num green" id="cntTotal">0</div>
@@ -810,9 +821,11 @@ function getDias(v) {
 }
 function getStatus(p) {
   const d=getDias(p.validade);
-  if(d<0) return 'vencido';
-  if(d<=7) return 'alerta';
-  if(d<=30) return 'atencao';
+  if(d<0)   return 'vencido';
+  if(d<=15)  return 'alerta';    // 🟠 vermelho-laranja
+  if(d<=30)  return 'atencao';   // 🟡 amarelo
+  if(d<=45)  return 'aviso';     // 🔵 azul
+  if(d<=60)  return 'observar';  // 🟢 verde-claro
   return 'ok';
 }
 function fmtData(v) {
@@ -861,6 +874,7 @@ function atualizarContadores() {
   document.getElementById('cntVencido').textContent=products.filter(p=>getStatus(p)==='vencido').length;
   document.getElementById('cntAlerta').textContent=products.filter(p=>getStatus(p)==='alerta').length;
   document.getElementById('cntAtencao').textContent=products.filter(p=>getStatus(p)==='atencao').length;
+  document.getElementById('cntAviso').textContent=products.filter(p=>getStatus(p)==='aviso').length;
   document.getElementById('cntTotal').textContent=products.length;
 }
 
@@ -911,7 +925,7 @@ function renderProducts() {
     });
   }
   list.sort((a,b)=>{
-    const order={vencido:0,alerta:1,atencao:2,ok:3};
+    const order={vencido:0,alerta:1,atencao:2,aviso:3,observar:4,ok:5};
     return (order[getStatus(a)]||0)-(order[getStatus(b)]||0);
   });
   const grid=document.getElementById('productsGrid');
@@ -962,6 +976,8 @@ function renderAlertas() {
   const vencidos=products.filter(p=>getStatus(p)==='vencido').sort((a,b)=>getDias(a.validade)-getDias(b.validade));
   const alerta=products.filter(p=>getStatus(p)==='alerta').sort((a,b)=>getDias(a.validade)-getDias(b.validade));
   const atencao=products.filter(p=>getStatus(p)==='atencao').sort((a,b)=>getDias(a.validade)-getDias(b.validade));
+  const aviso=products.filter(p=>getStatus(p)==='aviso').sort((a,b)=>getDias(a.validade)-getDias(b.validade));
+  const observar=products.filter(p=>getStatus(p)==='observar').sort((a,b)=>getDias(a.validade)-getDias(b.validade));
   const baixo=products.filter(p=>p.qtd<p.min&&p.min>0);
   let html='';
   const section=(title,list,cor,bgCor)=>{
@@ -982,8 +998,10 @@ function renderAlertas() {
     return s;
   };
   html+=section('🔴 VENCIDOS',vencidos,'var(--red)','var(--red-bg)');
-  html+=section('🟠 VENCEM EM 7 DIAS',alerta,'var(--orange)','var(--orange-bg)');
+  html+=section('🟠 VENCEM EM 15 DIAS',alerta,'var(--orange)','var(--orange-bg)');
   html+=section('🟡 VENCEM EM 30 DIAS',atencao,'var(--yellow)','var(--yellow-bg)');
+  html+=section('🔵 VENCEM EM 45 DIAS',aviso,'#1565C0','#EEF4FD');
+  html+=section('🟢 VENCEM EM 60 DIAS',observar,'#2E7A42','#EDF7F0');
   if(baixo.length){
     html+=`<div class="alerts-section-title" style="color:var(--blue)">🔵 ESTOQUE BAIXO (${baixo.length})</div>`;
     html+=baixo.map(p=>`<div class="alert-card">
@@ -1010,7 +1028,7 @@ function renderDash() {
   const cats={}; products.forEach(p=>{cats[p.cat]=(cats[p.cat]||0)+p.qtd;});
   const catEntries=Object.entries(cats).sort((a,b)=>b[1]-a[1]).slice(0,6);
   const maxCat=catEntries[0]?catEntries[0][1]:1;
-  const proximos=[...products].filter(p=>{const d=getDias(p.validade);return d>=0&&d<=30;}).sort((a,b)=>getDias(a.validade)-getDias(b.validade)).slice(0,8);
+  const proximos=[...products].filter(p=>{const d=getDias(p.validade);return d>=0&&d<=60;}).sort((a,b)=>getDias(a.validade)-getDias(b.validade)).slice(0,8);
 
   let html=`<div class="dash-title">📊 Visão Geral</div>
   <div class="dash-cards">
@@ -1032,8 +1050,8 @@ function renderDash() {
       }).join('')}</div></div>`;
   }
   if(proximos.length){
-    html+=`<div class="timeline"><div class="timeline-title">⏳ Vencem nos próximos 30 dias</div>
-      ${proximos.map(p=>{const d=getDias(p.validade);const st=getStatus(p);const colors={alerta:'var(--orange)',atencao:'var(--yellow)',ok:'var(--green)'};
+    html+=`<div class="timeline"><div class="timeline-title">⏳ Vencem nos próximos 60 dias</div>
+      ${proximos.map(p=>{const d=getDias(p.validade);const st=getStatus(p);const colors={alerta:'var(--orange)',atencao:'var(--yellow)',aviso:'#1565C0',observar:'#2E7A42',ok:'var(--green)'};
         return `<div class="timeline-item"><div class="timeline-dot" style="background:${colors[st]||'var(--green)'}"></div><div class="timeline-name">${p.nome}</div><div class="timeline-date">${fmtData(p.validade)}</div><div class="timeline-days" style="color:${colors[st]||'var(--green)'}">${d===0?'Hoje':d+'d'}</div></div>`;
       }).join('')}</div>`;
   }
@@ -1258,12 +1276,16 @@ function falar(texto, urgente=false) {
 function montarTextoAviso() {
   const vencidos=products.filter(p=>getStatus(p)==='vencido');
   const alertas=products.filter(p=>getStatus(p)==='alerta');
+  const atencao30=products.filter(p=>getStatus(p)==='atencao');
+  const aviso45=products.filter(p=>getStatus(p)==='aviso');
   const hoje=products.filter(p=>getDias(p.validade)===0);
   const baixo=products.filter(p=>p.qtd<p.min&&p.min>0);
   let partes=[];
-  if(vencidos.length) partes.push(`Atenção: ${vencidos.length} produto${vencidos.length>1?'s':''} vencido${vencidos.length>1?'s':''}: ${vencidos.slice(0,3).map(p=>p.nome).join(', ')}`);
+  if(vencidos.length) partes.push(`Atenção urgente: ${vencidos.length} produto${vencidos.length>1?'s':''} vencido${vencidos.length>1?'s':''}: ${vencidos.slice(0,3).map(p=>p.nome).join(', ')}`);
   if(hoje.length) partes.push(`${hoje.length} produto${hoje.length>1?'s':''} vence hoje: ${hoje.map(p=>p.nome).join(', ')}`);
-  else if(alertas.length) partes.push(`${alertas.length} produto${alertas.length>1?'s':''} vencem em até 7 dias`);
+  if(alertas.length) partes.push(`${alertas.length} produto${alertas.length>1?'s':''} vencem em até 15 dias`);
+  if(atencao30.length) partes.push(`${atencao30.length} produto${atencao30.length>1?'s':''} vencem em até 30 dias`);
+  if(aviso45.length) partes.push(`${aviso45.length} produto${aviso45.length>1?'s':''} vencem em até 45 dias`);
   if(baixo.length) partes.push(`Estoque baixo em ${baixo.length} produto${baixo.length>1?'s':''}`);
   return partes.join('. ');
 }
@@ -1306,9 +1328,9 @@ function fecharEmergencia() {
 function abrirDetalhe(id) {
   const p=products.find(x=>x.id===id); if(!p) return;
   const st=getStatus(p); const dias=getDias(p.validade);
-  const cores={vencido:'var(--red)',alerta:'var(--orange)',atencao:'var(--yellow)',ok:'var(--green)'};
-  const badges={vencido:'VENCIDO',alerta:'ALERTA',atencao:'ATENÇÃO',ok:'OK'};
-  const bgCores={vencido:'var(--red-bg)',alerta:'var(--orange-bg)',atencao:'var(--yellow-bg)',ok:'var(--green-bg)'};
+  const cores={vencido:'var(--red)',alerta:'var(--orange)',atencao:'var(--yellow)',aviso:'#1565C0',observar:'#2E7A42',ok:'var(--green)'};
+  const badges={vencido:'VENCIDO',alerta:'ALERTA 15d',atencao:'ATENÇÃO 30d',aviso:'AVISO 45d',observar:'OBSERVAR 60d',ok:'OK'};
+  const bgCores={vencido:'var(--red-bg)',alerta:'var(--orange-bg)',atencao:'var(--yellow-bg)',aviso:'#EEF4FD',observar:'#EDF7F0',ok:'var(--green-bg)'};
   const diasTexto=dias<0?`Vencido há ${Math.abs(dias)} dias`:dias===0?'Vence HOJE':`Vence em ${dias} dias`;
   const margem=p.precoCusto>0?(((p.precoVenda-p.precoCusto)/p.precoCusto)*100).toFixed(1)+'%':'—';
   document.getElementById('detalheContent').innerHTML=`
@@ -1316,7 +1338,7 @@ function abrirDetalhe(id) {
       ${p.foto?`<img src="${p.foto}" alt="${p.nome}">`:`<span style="font-size:72px">${EMOJIS[p.cat]||'📦'}</span>`}
     </div>
     <div class="detail-status-bar" style="background:${bgCores[st]}">
-      <span style="font-size:20px">${st==='vencido'?'🔴':st==='alerta'?'🟠':st==='atencao'?'🟡':'🟢'}</span>
+      <span style="font-size:20px">${st==='vencido'?'🔴':st==='alerta'?'🟠':st==='atencao'?'🟡':st==='aviso'?'🔵':st==='observar'?'🟢':'🟢'}</span>
       <div><div style="font-weight:700;color:${cores[st]};font-size:14px">${badges[st]}</div><div style="font-size:12px;color:${cores[st]};opacity:0.8">${diasTexto}</div></div>
       <div style="margin-left:auto;font-size:22px;font-weight:700;font-family:'Cormorant Garamond',serif;color:${cores[st]}">${fmtData(p.validade)}</div>
     </div>
@@ -1436,12 +1458,18 @@ function abrirAddComCodigo(barcode) { abrirAdd(); document.getElementById('fBarc
 function abrirWA() {
   const vencidos=products.filter(p=>getStatus(p)==='vencido');
   const alertas=products.filter(p=>getStatus(p)==='alerta');
+  const atencao30=products.filter(p=>getStatus(p)==='atencao');
+  const aviso45=products.filter(p=>getStatus(p)==='aviso');
+  const observar60=products.filter(p=>getStatus(p)==='observar');
   const baixo=products.filter(p=>p.qtd<p.min&&p.min>0);
   let msg=`🍷 *TREBBIANO — Relatório de Estoque*\n📅 ${new Date().toLocaleDateString('pt-BR')}\n\n`;
   if(vencidos.length){ msg+=`🔴 *VENCIDOS (${vencidos.length})*\n`; vencidos.forEach(p=>{ msg+=`• ${p.nome} — ${fmtData(p.validade)}\n`; }); msg+='\n'; }
-  if(alertas.length){ msg+=`🟠 *VENCEM EM 7 DIAS (${alertas.length})*\n`; alertas.forEach(p=>{ msg+=`• ${p.nome} — ${getDias(p.validade)}d · ${fmtData(p.validade)}\n`; }); msg+='\n'; }
-  if(baixo.length){ msg+=`🔵 *ESTOQUE BAIXO (${baixo.length})*\n`; baixo.forEach(p=>{ msg+=`• ${p.nome} — ${p.qtd}/${p.min} ${p.unidade}\n`; }); msg+='\n'; }
-  if(!vencidos.length&&!alertas.length&&!baixo.length) msg+='✅ Tudo em ordem! Nenhum alerta no momento.\n';
+  if(alertas.length){ msg+=`🟠 *VENCEM EM 15 DIAS (${alertas.length})*\n`; alertas.forEach(p=>{ msg+=`• ${p.nome} — ${getDias(p.validade)}d · ${fmtData(p.validade)}\n`; }); msg+='\n'; }
+  if(atencao30.length){ msg+=`🟡 *VENCEM EM 30 DIAS (${atencao30.length})*\n`; atencao30.forEach(p=>{ msg+=`• ${p.nome} — ${getDias(p.validade)}d · ${fmtData(p.validade)}\n`; }); msg+='\n'; }
+  if(aviso45.length){ msg+=`🔵 *VENCEM EM 45 DIAS (${aviso45.length})*\n`; aviso45.forEach(p=>{ msg+=`• ${p.nome} — ${getDias(p.validade)}d · ${fmtData(p.validade)}\n`; }); msg+='\n'; }
+  if(observar60.length){ msg+=`🟢 *VENCEM EM 60 DIAS (${observar60.length})*\n`; observar60.forEach(p=>{ msg+=`• ${p.nome} — ${getDias(p.validade)}d · ${fmtData(p.validade)}\n`; }); msg+='\n'; }
+  if(baixo.length){ msg+=`📦 *ESTOQUE BAIXO (${baixo.length})*\n`; baixo.forEach(p=>{ msg+=`• ${p.nome} — ${p.qtd}/${p.min} ${p.unidade}\n`; }); msg+='\n'; }
+  if(!vencidos.length&&!alertas.length&&!atencao30.length&&!aviso45.length&&!observar60.length&&!baixo.length) msg+='✅ Tudo em ordem! Nenhum alerta no momento.\n';
   msg+=`\n📊 Total: ${products.length} produtos cadastrados`;
   document.getElementById('waPreview').textContent=msg;
   document.getElementById('overlayWA').classList.add('open');
@@ -1460,7 +1488,7 @@ function enviarWA() {
 function exportarPDF() {
   const w=window.open('','_blank');
   const hoje=new Date().toLocaleDateString('pt-BR');
-  let rows=products.map(p=>{const st=getStatus(p);const cores={vencido:'#C0392B',alerta:'#D4621A',atencao:'#B8860B',ok:'#2E7D32'};return `<tr><td>${p.nome}</td><td>${p.cat}</td><td>${fmtData(p.validade)}</td><td style="color:${cores[st]};font-weight:700">${st.toUpperCase()}</td><td>${p.qtd} ${p.unidade}</td><td>${p.sku||'—'}</td><td>${p.barcode||'—'}</td><td>${fmtCurrency(p.precoVenda)||'—'}</td></tr>`;}).join('');
+  let rows=products.map(p=>{const st=getStatus(p);const cores={vencido:'#C0392B',alerta:'#D4621A',atencao:'#B8860B',aviso:'#1565C0',observar:'#2E7A42',ok:'#2E7D32'};return `<tr><td>${p.nome}</td><td>${p.cat}</td><td>${fmtData(p.validade)}</td><td style="color:${cores[st]||cores.ok};font-weight:700">${st.toUpperCase()}</td><td>${p.qtd} ${p.unidade}</td><td>${p.sku||'—'}</td><td>${p.barcode||'—'}</td><td>${fmtCurrency(p.precoVenda)||'—'}</td></tr>`;}).join('');
   w.document.write(`<!DOCTYPE html><html><head><title>Trebbiano — Relatório</title><style>body{font-family:Arial,sans-serif;padding:20px;color:#1A0A0F;}h1{color:#7A1422;margin-bottom:4px;}p{color:#8A7A7F;font-size:13px;margin-bottom:20px;}table{width:100%;border-collapse:collapse;font-size:13px;}th{background:#7A1422;color:white;padding:8px 10px;text-align:left;}td{padding:7px 10px;border-bottom:1px solid #F0E8D8;}tr:hover{background:#FDF8F0;}</style></head><body><h1>🍷 Trebbiano — Relatório de Estoque</h1><p>Gerado em: ${hoje} · ${products.length} produtos</p><table><thead><tr><th>Produto</th><th>Categoria</th><th>Validade</th><th>Status</th><th>Estoque</th><th>SKU</th><th>Cód. Barras</th><th>Preço Venda</th></tr></thead><tbody>${rows}</tbody></table></body></html>`);
   w.document.close();
   w.print();
